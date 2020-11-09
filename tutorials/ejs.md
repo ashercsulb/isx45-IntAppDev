@@ -159,7 +159,124 @@ Copy the content below to the **index.js** file.
   Start the server with  
   ``` npm start ``` or ``` node index.js ```  
   Test it: [http://localhost:3000/](http://localhost:3000)  
-  You should see the following  
+  You should see the following:  
+  ![Welcome](images/ejs_welcome.png)
+  
+  ## 4. Using EJS  
+  View [EJS](https://ejs.co/) for details.  Below are the various tags:  
+  - <% 'Scriptlet' tag, for control-flow, no output
+  - <%_ ‘Whitespace Slurping’ Scriptlet tag, strips all whitespace before it
+  - <%= Outputs the value into the template (HTML escaped)
+  - <%- Outputs the unescaped value into the template
+  - <%# Comment tag, no execution, no output
+  - <%% Outputs a literal '<%'
+  - %> Plain ending tag
+  - -%> Trim-mode ('newline slurp') tag, trims following newline
+  - _%> ‘Whitespace Slurping’ ending tag, removes all whitespace after it  
+  
+  We will use the **services.ejs** template to experiment receiving data from the server.  
+  Add a route to services.ejs passing it a name.  
+  Add the following to index.js:  
+  ```js
+  // Route to services page
+  app.get('/services', (request, response) => {
+      //Data
+      const name = "Amy";
+      response.render("services", {name: name});
+  });
+  ```
+  Create the following file (in the views directory)  
+  - Filename: services.ejs  
+    content:
+    ```js
+    <%- include("_header") -%>
+
+    <h1>Hello <%= name %>!</h1>
+    <h2>We are happy to provide you with our services</h2>
+
+    <%- include("_footer") -%>
+    ```  
+  Review the following:  
+  - How the variable **name** is declared and passed in index.js
+  - How the variable is used in services.ejs
+  
+  Stop and Start your server and go to the serivces page.  
+  Test it: [http://localhost:3000/](http://localhost:3000) and click on Services or  
+  [http://localhost:3000/services](http://localhost:3000/services)  
+  You should see the following:
+  ![Services](images/ejs_services.png)
+  
+  ### Passing more data (object with array)  
+  Experiment passing additional data.
+  Modify /services route in **index.js** per below:  
+  ```js
+  // Route to services page
+  app.get('/services', (request, response) => {
+      //Data
+      const name = "Amy";
+      const data = {
+          years: 5,
+          services: [
+              {
+                  name: "Consulting",
+                  desc: "State of the art consulting services"
+              },
+              {
+                  name: "Education",
+                  desc: "Educate your work force"
+              },
+              {
+                  name: "Security",
+                  desc: "Secure your network"
+              }
+          ]
+      };
+      response.render("services",
+          {
+              name: name,
+              data: data
+          });
+  }); 
+  ```  
+  Note:  
+  - Created a **data** object containing **years** and **services** array
+  - Passing data in response.render
+  
+  Modify **services.ejs*** per below:
+  ```js
+  <%- include("_header") -%>
+
+  <h1>Hello <%= name %></h1>
+  <h2>Below are the services we provide</h2>
+  <ul>
+      <% data.services.forEach(service => { %>
+          <li>
+              <%= service.name %> - <%= service.desc %>
+          </li>
+      <% }); %>
+  </ul>
+
+  <h3>Thank you for being with us for <%= data.years %> 
+      <% if(data.years > 1) { %> 
+          years 
+      <% } else { %> 
+          year 
+      <% };%>
+  </h3>
+
+  <%- include("_footer") -%>
+  ```  
+  Note / Review sytnax used for:
+  - Loop
+  - If condition
+  As you can see, this is regular JavaScript embedded in the HTML page.  Hence, Embedded JavaScript.
+  
+  
+
+  
+  
+  
+  
   
   
   
