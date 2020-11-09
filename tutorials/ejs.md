@@ -163,7 +163,7 @@ Copy the content below to the **index.js** file.
   ![Welcome](images/ejs_welcome.png)
   
   ## 4. Using EJS  
-  View [EJS](https://ejs.co/) for details.  Below are the various tags:  
+  View the [EJS](https://ejs.co/) site for details.  Below are the various tags:  
   - <% 'Scriptlet' tag, for control-flow, no output
   - <%_ ‘Whitespace Slurping’ Scriptlet tag, strips all whitespace before it
   - <%= Outputs the value into the template (HTML escaped)
@@ -203,7 +203,7 @@ Copy the content below to the **index.js** file.
   Stop and Start your server and go to the serivces page.  
   Test it: [http://localhost:3000/](http://localhost:3000) and click on Services or  
   [http://localhost:3000/services](http://localhost:3000/services)  
-  You should see the following:
+  You should see the following:  
   ![Services](images/ejs_services.png)
   
   ### Passing more data (object with array)  
@@ -242,7 +242,7 @@ Copy the content below to the **index.js** file.
   - Created a **data** object containing **years** and **services** array
   - Passing data in response.render
   
-  Modify **services.ejs*** per below:
+  Modify **services.ejs** per below:
   ```js
   <%- include("_header") -%>
 
@@ -268,15 +268,6 @@ Copy the content below to the **index.js** file.
   ```  
   Note / Review sytnax used for:
   - Loop
-  - If condition
+  - If condition  
   As you can see, this is regular JavaScript embedded in the HTML page.  Hence, Embedded JavaScript.
-  
-  
-
-  
-  
-  
-  
-  
-  
   
