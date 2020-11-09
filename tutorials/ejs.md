@@ -1,5 +1,5 @@
 # Overview
-This tutorial provides step-by-step instructions for setting up a simple web site using [EJS](https://ejs.co/) in a Node project.  
+This tutorial provides step-by-step instructions for setting up a simple web site using [EJS](https://ejs.co/) in a Node project.  It is to supplement class discussion and may not cover details of every step.
 
 Assumptions:
 - Using VSCode
@@ -25,7 +25,7 @@ At completion of the project, your file/folder structure will be as follows
     -- formAjax.ejs
     -- formPost.ejs
     -- services.ejs
-    -- welcome.ejs
+    -- index.ejs
   - index.js
   - package-lock.json
   - package.json
@@ -63,7 +63,8 @@ At completion of the project, your file/folder structure will be as follows
     
 ## 2. Create EJS Views and Stylesheet
 ### EJS
-We will create a header and footer views to be included in our other pages.  
+We will create header and footer views to be included in our other pages.  
+Create documents in the **views** directory  
 1. _header.ejs content:
 ```js
 <!DOCTYPE html>
@@ -94,8 +95,8 @@ We will create a header and footer views to be included in our other pages.
 </body>
 </html>
 ```  
-3. The welcome page will be our initial start page.  
-welcome.ejs content:
+3. The index page will be our start page.  
+index.ejs content:
 ```js
 <%- include("_header") -%>
 
@@ -122,5 +123,43 @@ In a later tutorial, we will use [bootstrap](https://getbootstrap.com/).
    ```
 
 ## 3. Setup The Server  
+Copy the content below to the **index.js** file.   
+  - Content:
+  ```js
+  // Load packages and access services
+  const express = require("express");
+  const app = express();
 
+  // Setup view engine to ejs
+  app.set('view engine', 'ejs');
 
+  // Serve static content directly
+  app.use(express.static("css"));
+
+  // Setup routes
+
+  // Route to welcome page
+  app.get('/', (request, response) => {
+      response.render("index");
+  });
+
+  // Start listening to incoming requests
+  // If process.env.PORT is not defined, port number 3000 is used
+  const listener = app.listen(process.env.PORT || 3000, () => {
+      console.log(`Your app is listening on port ${listener.address().port}`);
+  });
+  ```  
+  ### Notes  
+  - We must setup the server to use the EJS emplate engine  
+    ``` app.set('view engine', 'ejs'); ```  
+  - No need to ``` require("ejs")``` because Express handles this
+  - No need to ``` app.use(express.static("views")); ``` because it is the default for EJS  
+  
+  ### Start the server  
+  Start the server with  
+  ``` npm start ``` or ``` node index.js ```  
+  Test it: [http://localhost:3000/](http://localhost:3000)  
+  You should see the following  
+  
+  
+  
