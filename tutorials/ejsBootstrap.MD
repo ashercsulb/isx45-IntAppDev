@@ -1,5 +1,5 @@
 # Overview
-This tutorial builds on the ejs tutorial.  It provides step-by-step instructions for using [Bootstrap](https://getbootstrap.com/) to enhance your forms.  This is not an exhaustive study of Bootstrap, it is simply used to enhance the navigation bar and the forms previously created.  This is a supplement to class discussion and may not cover details of every step.
+This tutorial builds on the ejs tutorial.  It provides step-by-step instructions for using [Bootstrap](https://getbootstrap.com/) to enhance your forms.  This is not an exhaustive study of Bootstrap; it is simply used to enhance the navigation bar and the forms previously created.  This is a supplement to class discussion and may not cover details of every step.
 
 Assumptions:
 - Using VSCode
@@ -7,7 +7,7 @@ Assumptions:
 - Completed previous EJS tutorial
 
 # 1. What is Bootstrap  
-[Bootstrap](https://getbootstrap.com/) is a popular front-end open source toolkit, featuring Sass variables and mixins, responsive gridy system, extensive prebuilt components, and powerful JavaScript plugins.  
+[Bootstrap](https://getbootstrap.com/) is a popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.  
 It is a CSS Framework for developing responsive and mobile-first websites.
 
 # 2. Add Bootstrap  
@@ -43,7 +43,7 @@ It is a CSS Framework for developing responsive and mobile-first websites.
         </table>
     ```  
 # 3. Bootstrap Navigation Bar  
-Modify the _header.ejs file to use Bootstraps navigaton bar.  
+Modify the _header.ejs file to use Bootstraps navigation bar.  
 Updated _header.ejs content:  
 ```js
 <!DOCTYPE html>
@@ -89,10 +89,10 @@ Updated _footer.ejs content:
 </html>  
 ```
 
-Start the server and view the updated navigation bar.  Your should see the following:  
+Start the server and view the updated navigation bar.  You should see the following:  
 ![Navbar](images/ejsBootstrap_navbar.png)  
 
-If you resize your browswer (small width), the navbar will collapse and appear as below:  
+If you resize your browser (small width), the navbar will collapse and appear as below:  
 ![Navbar](images/ejsBootstrap_navbar2.png)  
 
 Look at the Bootstrap website and experiment with other colors, margins, etc...   
@@ -158,12 +158,8 @@ Updated formPost.ejs content:
 
 <%- include("_footer") -%>
 ```  
-Stop / Start the server and view the updated form.  Your should see the following:  
+Stop / Start the server and view the updated form.  You should see the following:  
 ![Form](images/ejsBootstrap_form.png)  
 
 Experiment with other form options.  
-Optional: Modify formAjax  
-
-
-
-    
+Optional: Modify formAjax.ejs  
