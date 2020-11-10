@@ -59,12 +59,12 @@ At completion of the project, your file/folder structure will be as follows
       "license": "ISC"
      }
      ```  
- 5. Intall Express and EJS modules  
+ 5. Install Express and EJS modules  
     ``` npm install express ejs ```
     
 ## 2. Create EJS Views and Stylesheet
 ### EJS
-We will create header and footer views to be included in our other pages.  
+Create header and footer views to be included in our other pages.  
 Create documents in the **views** directory  
 1. _header.ejs content:
 ```js
@@ -151,7 +151,7 @@ Copy the content below to the **index.js** file.
   });
   ```  
   ### Notes  
-  - We must setup the server to use the EJS emplate engine  
+  - We must setup the server to use the EJS template engine  
     ``` app.set('view engine', 'ejs'); ```  
   - No need to ``` require("ejs")``` because Express handles this
   - No need to ``` app.use(express.static("views")); ``` because it is the default for EJS  
@@ -201,7 +201,7 @@ Copy the content below to the **index.js** file.
   - How the variable **name** is declared and passed in index.js
   - How the variable is used in services.ejs
   
-  Stop and Start your server and go to the serivces page.  
+  Stop and Start your server and go to the services page.  
   Test it: [http://localhost:3000/](http://localhost:3000) and click on Services or  
   [http://localhost:3000/services](http://localhost:3000/services)  
   You should see the following:  
@@ -267,12 +267,12 @@ Copy the content below to the **index.js** file.
 
   <%- include("_footer") -%>
   ```  
-  Note / Review sytnax used for:
+  Note / Review syntax used for:
   - Loop
   - If condition  
   As you can see, this is regular JavaScript embedded in the HTML page.  Hence, Embedded JavaScript.
   
-  Stop and Start your server and go to the serivces page.  
+  Stop and Start your server and go to the services page.  
   Test it: [http://localhost:3000/](http://localhost:3000) and click on Services or  
   [http://localhost:3000/services](http://localhost:3000/services)  
   You should see the following:  
@@ -282,7 +282,7 @@ Copy the content below to the **index.js** file.
   In this section, we will demonstrate processing forms.  We will experiment with:  
   - Both synchronous and asynchronous HTTP requests
   - Form enctype (encoded type)
-    - application/x-www-form-urlencoded - This is the default.  Characters are endoced before sent.
+    - application/x-www-form-urlencoded - This is the default.  Characters are encoded before sent.
     - multipart/form-data - No characters are encoded. 
     
   For illustration purposes, we will call the same form view for both GET and POST requests.  
@@ -319,7 +319,7 @@ Copy the content below to the **index.js** file.
   In order to parse the form using ```request.body.variableName```, you must add middleware to your **index.js** file.  
   Add the following (prior to the routes):  
   ```js
-  // Add middleware to parse defaul urlencoded form
+  // Add middleware to parse default urlencoded form
   app.use(express.urlencoded({ extended: false }));
   ```  
   
@@ -354,7 +354,7 @@ Copy the content below to the **index.js** file.
     ```  
     Notes
     - If block logic checks if **message** variable exists.  It does not from a GET request.  In this case, we set name to blank.
-    - If messge does exist, we set **name** to the value entered in the form
+    - If message does exist, we set **name** to the value entered in the form
     - The input tag value attribute is <%= name %>
     - There are other ways to handle this.  For example, pass empty values for variables in the GET route and populated values in the POST route.  This way, logic is not performed in the view.  
     
@@ -367,7 +367,7 @@ Copy the content below to the **index.js** file.
   ![formPost](images/ejs_formPost2.png)   
   
 ### Enhance the form / Change route logic
-Make the following enahancements:
+Make the following enhancements:
 - Add an e-mail and payment option (radio button) to the form
 - Change route logic to send data to the views (both GET and PUT)  
 
@@ -473,7 +473,7 @@ Add the following towards the top of the file:
 const multer = require("multer");
 const upload = multer();
 ```  
-Modify the /formPost POST route as follows (chagne the first line):
+Modify the /formPost POST route as follows (change the first line):
 ```js
 // POST Route to form page
 //app.post('/formPost', (request, response) => {
@@ -502,7 +502,7 @@ Summary:
 You processed forms using the default application/x-www-form-urlencoded and the multipart/form-data encoding types.  
 
 Optional:  
-You can revert the form back to the default encodying type: application/x-www-form-urlencoded.
+You can revert the form back to the default encoding type: application/x-www-form-urlencoded.
 
 ### Form AJAX
 When using AJAX, we prevent the default synchronous POST.  The form will retain the data the user entered.  
@@ -607,7 +607,7 @@ Post formAjax:
 
 
 ## 6. View Network Traffic / Compare regular Post vs. AJAX Post  
-From your browswer, open Developer Tools --> Network  
+From your browser, open Developer Tools --> Network  
 Test your application on both form types.  Review the request and response messages.  
 Notice how small the response is for AJAX calls.  
 
