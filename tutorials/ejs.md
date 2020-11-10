@@ -600,10 +600,10 @@ Test it: [http://localhost:3000/](http://localhost:3000) and click on Form Post
 Notice the difference in behavior.
 
 Screen shots.  Get formAjax:  
-[FormAjax](images/ejs_formAjax.png)  
+![FormAjax](images/ejs_formAjax.png)  
 
 Post formAjax:  
-[FormAjax](images/ejs_formAjax2.png)  
+![FormAjax](images/ejs_formAjax2.png)  
 
 
 ## 6. View Network Traffic / Compare regular Post vs. AJAX Post  
