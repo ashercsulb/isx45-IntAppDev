@@ -290,7 +290,177 @@ Copy the content below to the **index.js** file.
   ### Form POST  
   In this scenario, we will not use AJAX, just the traditional POST.  
   We will create GET and POST routes to **formPost**, passing variables back in the POST call.  
-  This is simply a demonstration for you to understand how to retrieve data from a form and send it to another page.  
+  This is simply a demonstration for you to understand how to retrieve data from a form and send it to another page.  Also, to perform EJS logic in the template.  It is not best practice.  
+  Add the following routes to **index.js**
+  ```js
+  // GET Route to form page
+  app.get('/formPost', (request, response) => {
+      response.render("formPost");
+  });
+
+  // POST Route to form page
+  app.post('/formPost', (request, response) => {
+      const message = "success";
+      // Get name passed from the form
+      const name = request.body.name;
+      //Call formPost passing message and name
+      response.render("formPost", 
+          {
+              message: message,
+              name: name
+          });
+  });
+  ```  
+  Note the following for the POST route
+  - Passing two variables back: message and name
+    - name is the value entered in the form
+  
+  In order to parse the form using ```request.body.variableName```, you must add middleware to your **index.js** file.  
+  Add the following (prior to the routes):  
+  ```js
+  // Add middleware to parse defaul urlencoded form
+  app.use(express.urlencoded({ extended: false }));
+  ```  
+  
+  Create the formPost file.  
+  - Filename: formPost.ejs
+    content:
+    ```js
+    <%- include("_header") -%>
+
+    <h1>Sample Form View</h1>
+
+    <% if (typeof message === 'undefined') { %>
+        <h2>GET Request - Message Not Defined</h2>
+        <p>Please enter your name and submit the form</p>
+        <% name = ""; %> 
+    <% } else { %>
+        <h1>POST Request - Message exists: <%= message %></h1>
+        <p>Below is the data you entered</p>
+        <%  name = name; %>
+    <% } %>
+
+    <form action="/formPost" method="POST">
+        <p>
+            <label for="name">Name</label>:
+            <input type="text" name="name" id="name" value="<%= name %>" required>
+        </p>
+        <input type="submit" value="Submit">
+        <input type="reset" value="Cancel">
+    </form>
+
+    <%- include("_footer") -%>
+    ```  
+    Notes
+    - If block logic checks if **message** variable exists.  It does not from a GET request.  In this case, we set name to blank.
+    - If messge does exist, we set **name** to the value entered in the form
+    - The input tag value attribute is <%= name %>
+    - There are other ways to handle this.  For example, pass empty values for variables in the GET route and populated values in the POST route.  This way, logic is not performed in the view.  
+    
+  Stop and Start your server and go to the Form Post page.  
+  Test it: [http://localhost:3000/](http://localhost:3000) and click on Form Post  
+  You should see the following:  
+  ![formPost](images/ejs_formPost.png)  
+  
+  Enter your name and press submit.  You should see the following (with your name):  
+  ![formPost](images/ejs_formPost2.png)   
+  
+### Enhance the form / Change route logic
+Make the following enahancements:
+- Add an e-mail and payment option (radio button) to the form
+- Change route logic to send data to the views (both GET and PUT)  
+
+Updated index.js file:
+```js
+// GET Route to form page
+app.get('/formPost', (request, response) => {
+    const message = "get";
+    const data = {
+        name: "",
+        email: "",
+        payment: ""
+    };
+    response.render("formPost", 
+        {
+            message: message,
+            data: data
+        });
+
+});
+
+// POST Route to form page
+app.post('/formPost', (request, response) => {
+    const message = "post";
+    // Get name passed from the form
+    const data = {
+        name: request.body.name,
+        email: request.body.email,
+        payment: request.body.payment
+    }
+    //Call formPost passing message and name
+    response.render("formPost", 
+        {
+            message: message,
+            data: data
+        });
+});
+```  
+
+Updated formPost.ejs file:  
+```js
+<%- include("_header") -%>
+
+<h1>Sample Form View</h1>
+
+<% if (message === "get") { %>
+    <p>Please enter your information below and submit the form</p>
+<% } else { %>
+    <p>Below is the data you entered</p>
+    <%= data.payment %>
+<% } %>
+
+<form action="/formPost" method="POST">
+    <p>
+        <label for="name">Name</label>:
+        <input type="text" name="name" id="name" value="<%= data.name %>" required>
+    </p>
+    <p>
+        <label for="email">Email</label>:
+        <input type="email" name="email" id="email" value="<%= data.email %>" required placeholder="name@domain">
+    </p>
+    <p>
+        Payment Type:<br>
+        <input type="radio" name="payment" id="cash" value="cash">
+        <label for="cash">Cash</label>
+        <br>
+        <input type="radio" name="payment" id="cc" value="cc">
+        <label for="cc">Credit Card</label>
+        <br>
+        <input type="radio" name="payment" id="gpay" value="gpay">
+        <label for="gpay">Google Pay</label>
+        <br>
+        <input type="radio" name="payment" id="appay" value="appay">
+        <label for="appay">Apple Pay</label>
+    </p>
+    <input type="submit" value="Submit">
+    <input type="reset" value="Cancel">
+</form>
+
+<script>document.getElementById("<%= data.payment %>").checked = true;</script>
+
+<%- include("_footer") -%>
+```  
+Note:
+- Note ```<script>document.getElementById("<%= data.payment %>").checked = true;</script>``` at the bottom of the file.  
+
+Stop and Start your server and go to the Form Post page.  
+Test it: [http://localhost:3000/](http://localhost:3000) and click on Form Post  
+
+
+
+
+    
+    
   
   
   
