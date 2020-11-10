@@ -446,7 +446,9 @@ Updated formPost.ejs file:
     <input type="reset" value="Cancel">
 </form>
 
-<script>document.getElementById("<%= data.payment %>").checked = true;</script>
+<% if (message === "post") { %>
+    <script>document.getElementById("<%= data.payment %>").checked = true;</script>
+<% } %> 
 
 <%- include("_footer") -%>
 ```  
