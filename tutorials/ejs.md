@@ -271,3 +271,26 @@ Copy the content below to the **index.js** file.
   - If condition  
   As you can see, this is regular JavaScript embedded in the HTML page.  Hence, Embedded JavaScript.
   
+  Stop and Start your server and go to the serivces page.  
+  Test it: [http://localhost:3000/](http://localhost:3000) and click on Services or  
+  [http://localhost:3000/services](http://localhost:3000/services)  
+  You should see the following:  
+  ![Services](images/ejs_services2.png)
+
+  ## 5. Working with Forms
+  In this section, we will demonstrate processing forms.  We will experiment with:  
+  - Both synchronous and asynchronous HTTP requests
+  - Form enctype (encoded type)
+    - application/x-www-form-urlencoded - This is the default.  Characters are endoced before sent.
+    - multipart/form-data - No characters are encoded. 
+    
+  For illustration purposes, we will call the same form view for both GET and POST requests.  
+  In the form, we'll use JavaScript to check if variables have been passed back (POST).  If so, we'll populate the form with the data entered.  
+  
+  ### Form POST  
+  In this scenario, we will not use AJAX, just the traditional POST.  
+  We will create GET and POST routes to **formPost**, passing variables back in the POST call.  
+  This is simply a demonstration for you to understand how to retrieve data from a form and send it to another page.  
+  
+  
+  
