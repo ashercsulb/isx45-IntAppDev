@@ -26,6 +26,7 @@ At completion of the project, your file/folder structure will be as follows
     -- formPost.ejs
     -- services.ejs
     -- index.ejs
+  - .gitignore
   - index.js
   - package-lock.json
   - package.json
