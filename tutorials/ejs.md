@@ -391,7 +391,7 @@ app.get('/formPost', (request, response) => {
 // POST Route to form page
 app.post('/formPost', (request, response) => {
     const message = "post";
-    // Get name passed from the form
+    // Send form data back to the form
     const data = {
         name: request.body.name,
         email: request.body.email,
@@ -416,7 +416,6 @@ Updated formPost.ejs file:
     <p>Please enter your information below and submit the form</p>
 <% } else { %>
     <p>Below is the data you entered</p>
-    <%= data.payment %>
 <% } %>
 
 <form action="/formPost" method="POST">
@@ -456,11 +455,168 @@ Note:
 Stop and Start your server and go to the Form Post page.  
 Test it: [http://localhost:3000/](http://localhost:3000) and click on Form Post  
 
+### Form enctype: multipart/form-data
+Change a single line in your form per the below:
+``` <form enctype="multipart/form-data" action="/formPost" method="POST"> ```  
+
+Stop and Start your server and go to the Form Post page.  
+Test it: [http://localhost:3000/](http://localhost:3000) and click on Form Post  
+
+Notice that you are not getting the data back.  In order to process **multipart/form-data**, use **multer** package.  
+Install multer package:  
+```npm install multer ```  
+
+Edit **index.js** to require multer, access multer services, and modify the /formPost POST route.  
+Add the following towards the top of the file:  
+```js
+const multer = require("multer");
+const upload = multer();
+```  
+Modify the /formPost POST route as follows (chagne the first line):
+```js
+// POST Route to form page
+//app.post('/formPost', (request, response) => {
+app.post('/formPost', upload.array(), (request, response) => {    
+    const message = "post";
+    // Send form data back to the form
+    const data = {
+        name: request.body.name,
+        email: request.body.email,
+        payment: request.body.payment
+    }
+    //Call formPost passing message and name
+    response.render("formPost", 
+        {
+            message: message,
+            data: data
+        });
+});
+```
+
+Stop and Start your server and go to the Form Post page.  
+Test it: [http://localhost:3000/](http://localhost:3000) and click on Form Post  
+The application works!  
+
+Summary:  
+You processed forms using the default application/x-www-form-urlencoded and the multipart/form-data encoding types.  
+
+Optional:  
+You can revert the form back to the default encodying type: application/x-www-form-urlencoded.
+
+### Form AJAX
+When using AJAX, we prevent the default synchronous POST.  The form will retain the data the user entered.  
+In this scenario, since we are not doing anything with the data at the server, we will simply modify the message and provide feedback at the bottom of the form.  
+
+Update index.js (add routes for AJAX call):  
+```js
+// GET Route to form page
+app.get('/formAjax', (request, response) => {
+    response.render("formAjax")
+});
+
+// POST Route to form page
+app.post('/formAjax', upload.array(), (request, response) => {    
+    // Send form data back to the form
+    const data = {
+        name: request.body.name,
+        email: request.body.email,
+        payment: request.body.payment
+    };
+    //Call formPost passing message and name
+    response.json(data);
+});
+```
+
+Create formAjax.ejs:  
+```js
+<%- include("_header") -%>
+
+<h1>Sample Form View</h1>
+
+<p id="message">Please enter your information below and submit the form</p>
+
+<form>
+    <p>
+        <label for="name">Name</label>:
+        <input type="text" name="name" id="name" required>
+    </p>
+    <p>
+        <label for="email">Email</label>:
+        <input type="email" name="email" id="email" required placeholder="name@domain">
+    </p>
+    <p>
+        Payment Type:<br>
+        <input type="radio" name="payment" id="cash" value="cash">
+        <label for="cash">Cash</label>
+        <br>
+        <input type="radio" name="payment" id="cc" value="cc">
+        <label for="cc">Credit Card</label>
+        <br>
+        <input type="radio" name="payment" id="gpay" value="gpay">
+        <label for="gpay">Google Pay</label>
+        <br>
+        <input type="radio" name="payment" id="appay" value="appay">
+        <label for="appay">Apple Pay</label>
+    </p>
+    <input type="submit" value="Submit">
+    <input type="reset" value="Cancel">
+</form>
+<p id="result"></p>
+
+<script>
+// Typically, if the script is large, we place it in a separate file
+//   For demonstrations, it is included in the same file.
+// Handle form submission
+document.querySelector("form").addEventListener("submit", e => {
+  // Cancel default behavior of sending a synchronous POST request
+  e.preventDefault();
+  // Create a FormData object, passing the form as a parameter
+  const formData = new FormData(e.target);
+  // Send form data to the server with an asynchronous POST request
+  fetch("/formAjax", {
+    method: "POST",
+    body: formData
+  })
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById("message").textContent = "Thank you for submitting the form";
+      document.getElementById("result").innerHTML = `${data.name}, we received your order. <br>
+        Order status will be sent to ${data.email}.  <br>
+        Thanks for using ${data.payment} payment type.`;
+      //document.getElementById("data.payment").checked = true;
+    })
+    .catch(err => {
+        document.getElementById("message").textContent = `Error: ${err.message}`;
+    });
+});
+</script>
+
+<%- include("_footer") -%>
+```  
+
+Stop and Start your server and go to the Form Post page.  
+Test it: [http://localhost:3000/](http://localhost:3000) and click on Form Post  
+Notice the difference in behavior.
+
+Screen shots.  Get formAjax:  
+[FormAjax](images/ejs_formAjax.png)  
+
+Post formAjax:  
+[FormAjax](images/ejs_formAjax2.png)  
 
 
+## 6. View Network Traffic / Compare regular Post vs. AJAX Post  
+From your browswer, open Developer Tools --> Network  
+Test your application on both form types.  Review the request and response messages.  
+Notice how small the response is for AJAX calls.  
 
-    
-    
+## 7.  Post your solution to GitHub  
+If you previously created a repository in GitHub and cloned it to your local environment, commit your changes and push the code to GitHub.  
+Otherwise, create a .gitignore file as follows.
+- Filename: .gitignore
+  content:
+  ``` node_modules/ ```  
   
+  Create a repository from your code, commit, and push to GitHub.  
   
   
