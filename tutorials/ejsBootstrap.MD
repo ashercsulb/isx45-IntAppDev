@@ -46,48 +46,35 @@ It is a CSS Framework for developing responsive and mobile-first websites.
 Modify the _header.ejs file to use Bootstraps navigaton bar.  
 Updated _header.ejs content:  
 ```js
-<%- include("_header") -%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EJS Tutorial</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand">EJS Tutorial</a>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Welcome</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/services">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/formPost">Form Post</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/formAjax">Form Ajax</a>
+                </li>
+            </ul>
+        </nav>
+    
 
-<h1>Sample Form View</h1>
-
-<% if (message === "get") { %>
-    <p>Please enter your information below and submit the form</p>
-<% } else { %>
-    <p>Below is the data you entered</p>
-<% } %>
-
-<form enctype="multipart/form-data" action="/formPost" method="POST">
-    <p>
-        <label for="name">Name</label>:
-        <input type="text" name="name" id="name" value="<%= data.name %>" required>
-    </p>
-    <p>
-        <label for="email">Email</label>:
-        <input type="email" name="email" id="email" value="<%= data.email %>" required placeholder="name@domain">
-    </p>
-    <p>
-        Payment Type:<br>
-        <input type="radio" name="payment" id="cash" value="cash">
-        <label for="cash">Cash</label>
-        <br>
-        <input type="radio" name="payment" id="cc" value="cc">
-        <label for="cc">Credit Card</label>
-        <br>
-        <input type="radio" name="payment" id="gpay" value="gpay">
-        <label for="gpay">Google Pay</label>
-        <br>
-        <input type="radio" name="payment" id="appay" value="appay">
-        <label for="appay">Apple Pay</label>
-    </p>
-    <input type="submit" value="Submit">
-    <input type="reset" value="Cancel">
-</form>
-
-<% if (message === "post") { %>
-    <script>document.getElementById("<%= data.payment %>").checked = true;</script>
-<% } %>    
-
-<%- include("_footer") -%>
 ```  
 
 Modify the _footer.ejs file to close the <div> tag created in the header.  
