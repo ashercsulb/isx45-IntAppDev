@@ -343,7 +343,7 @@ Copy the content below to the **index.js** file.
 
     <form action="/formPost" method="POST">
         <p>
-            <label for="name">Name</label>:
+            <label for="name">Name:</label>
             <input type="text" name="name" id="name" value="<%= name %>" required>
         </p>
         <input type="submit" value="Submit">
@@ -421,11 +421,11 @@ Updated formPost.ejs file:
 
 <form action="/formPost" method="POST">
     <p>
-        <label for="name">Name</label>:
+        <label for="name">Name:</label>
         <input type="text" name="name" id="name" value="<%= data.name %>" required>
     </p>
     <p>
-        <label for="email">Email</label>:
+        <label for="email">Email:</label>
         <input type="email" name="email" id="email" value="<%= data.email %>" required placeholder="name@domain">
     </p>
     <p>
@@ -553,11 +553,11 @@ Create formAjax.ejs:
 
 <form>
     <p>
-        <label for="name">Name</label>:
+        <label for="name">Name:</label>
         <input type="text" name="name" id="name" required>
     </p>
     <p>
-        <label for="email">Email</label>:
+        <label for="email">Email:</label>
         <input type="email" name="email" id="email" required placeholder="name@domain">
     </p>
     <p>
