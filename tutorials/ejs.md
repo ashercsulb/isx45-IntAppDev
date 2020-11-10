@@ -618,6 +618,4 @@ Otherwise, create a .gitignore file as follows.
   content:
   ``` node_modules/ ```  
   
-  Create a repository from your code, commit, and push to GitHub.  
-  
-  
+  Create a repository from your code, commit, and push to GitHub.
