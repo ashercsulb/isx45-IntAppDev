@@ -508,6 +508,19 @@ You can revert the form back to the default encoding type: application/x-www-for
 When using AJAX, we prevent the default synchronous POST.  The form will retain the data the user entered.  
 In this scenario, since we are not doing anything with the data at the server, we will simply modify the message and provide feedback at the bottom of the form.  
 
+Update index.js to enable cross-origen requests.  Add the following near the previous middleware added:  
+```js
+// Enable CORS (see https://enable-cors.org/server_expressjs.html)
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+```  
+
 Update index.js (add routes for AJAX call):  
 ```js
 // GET Route to form page
