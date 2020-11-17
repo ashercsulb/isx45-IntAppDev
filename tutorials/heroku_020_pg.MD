@@ -100,7 +100,7 @@ Below is a link to download and install PostgreSQL:
        First solution is to enter the application name.  Next is to add the Heroku remote Git path.  
     3. ```heroku config --app asherherokupg``` (use your app name)  
        You will see the DATABASE_URL (This is the same as the URI setting you saw in Heroku above)  
-    4. Add the remote "Heroku git URL" to your local environment
+    4. Add the remote "Heroku git URL" to your local environment  
        Can do this from VSCode or Command Line.  I'll show the CLI command.  Issue following command:  
        ```git remote add heroku https://git.heroku.com/yourHerokuGitUrl.git```  (Use your Heroku git URL from above)  
     5. ```heroku config```  
