@@ -1,5 +1,5 @@
 # Overview  
-In this tutorial will create an application on Heroku with a PostgreSQL database.  
+In this tutorial you will create an application on Heroku with a PostgreSQL database.  
 The focus will be on getting the database setup in Heroku and connecting to it from your local machine using the Heroku CLI.  
 In a future tutorial, we will implement an application using a back end PostgreSQL database.  
 
