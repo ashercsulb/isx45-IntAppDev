@@ -6,3 +6,4 @@ Repository to supplement Internet Application Development class
 2. [EJS Bootstrap Tutorial](tutorials/ejsBootstrap.MD)  
 3. [Heroku - Create Account / Create an App from GitHub Repository](tutorials/heroku_010.MD)  
 4. [Heroku - Setup PostgreSQL Database / Connect from local machine](tutorials/heroku_020_pg.MD)  
+5. [Heroku - PostgreSQL Database / File I/O](tutorials/heroku_023_pgio.MD)  
