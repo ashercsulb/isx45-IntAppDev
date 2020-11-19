@@ -409,7 +409,11 @@ We will start with a simple page displaying records in the **PRODUCT** table
       
 4. Modify **index.js**: add resources to display and process the input form  
    Content:  
-   ```js
+   ```js  
+   app.get("/input", (req, res) => {
+      res.render("input");
+   });
+
    app.post("/input", (req, res) => {
        if(!req.files || Object.keys(req.files).length === 0) {
            message = "Error: Import file not uploaded";
