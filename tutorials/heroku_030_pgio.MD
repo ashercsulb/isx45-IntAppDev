@@ -337,29 +337,25 @@ We will start with a simple page displaying records in the **PRODUCT** table
    Confirm the changes.  
    
 # Input from Local File  
+  Updated to use Multer instead of express-fileupload.  
+  Since we are alerady using Multer to get the forms values, we will use it for file upload.  
+  [npm multer reference](https://www.npmjs.com/package/multer)  
+  
   In this section, a local file will be used for inserting records to the database.  
   We cannot use typical file I/O when the application is running on the server.  
   The high-level steps are:  
-  - Use express-fileupload package  
+  - Use Multer to upload a file to memory   
   - Look at the file content, parse it, and upload to the database  
  
-1. Install the following packages  
-   ```npm install express-fileupload multer```  
-   
-   Express-fileupload is used to identify the file to be uploaded.  
-   Multer middleware is used to manage form data  
-   
-2. Update **index.js** to use Express-fileupload and Multer  
+1. Update **index.js** to use Multer  
    Add the following content towards the top of the file  
    ```js
-   const fileUpload = require("express-fileupload");
-   app.use(fileUpload());
    const multer = require("multer");
    const upload = multer();
    ```  
    
 3.  Create a view to select a file to be processed.  
-    File name:  **input.js** (in the views directory)  
+    File name:  **input.ejs** (in the views directory)  
     Content:  
       ```html
       <%- include("_header") -%>
@@ -414,38 +410,36 @@ We will start with a simple page displaying records in the **PRODUCT** table
       res.render("input");
    });
 
-   app.post("/input", (req, res) => {
-       if(!req.files || Object.keys(req.files).length === 0) {
-           message = "Error: Import file not uploaded";
-           return res.send(message);
-       };
-       //Read file line by line, inserting records
-       const fn = req.files.filename;
-       const buffer = fn.data;
-       const lines = buffer.toString().split(/\r?\n/);
-
-       lines.forEach(line => {
-            //console.log(line);
-            product = line.split(",");
-            //console.log(product);
-            const sql = "INSERT INTO PRODUCT(prod_id, prod_name, prod_desc, prod_price) VALUES ($1, $2, $3, $4)";
-            pool.query(sql, product, (err, result) => {
-                if (err) {
-                    console.log(`Insert Error.  Error message: ${err.message}`);
-                } else {
-                    console.log(`Inserted successfully`);
-                }
-           });
-       });
-       message = `Processing Complete - Processed ${lines.length} records`;
-       res.send(message);
-   });   
+app.post("/input",  upload.single('filename'), (req, res) => {
+    if(!req.file || Object.keys(req.file).length === 0) {
+        message = "Error: Import file not uploaded";
+        return res.send(message);
+    };
+    //Read file line by line, inserting records
+    const buffer = req.file.buffer; 
+    const lines = buffer.toString().split(/\r?\n/);
+    
+    lines.forEach(line => {
+         //console.log(line);
+         product = line.split(",");
+         //console.log(product);
+         const sql = "INSERT INTO PRODUCT(prod_id, prod_name, prod_desc, prod_price) VALUES ($1, $2, $3, $4)";
+         pool.query(sql, product, (err, result) => {
+             if (err) {
+                 console.log(`Insert Error.  Error message: ${err.message}`);
+             } else {
+                 console.log(`Inserted successfully`);
+             }
+        });
+    });
+    message = `Processing Complete - Processed ${lines.length} records`;
+    res.send(message);
+});
    ```  
    
    Notes
    - Get request simply displays the form  
    - Post request  
-     - Assign a variable to the file to be processed  
      - Write the data to a buffer variable
      - Transform the buffer to a string and split on carriage return and line feed (\r\n) to process each line separately  
      - Split each line by comma to get each individual attribute  
@@ -455,10 +449,10 @@ We will start with a simple page displaying records in the **PRODUCT** table
          
 5. Stop and start the server.  Process the following file:  
    ```
-   111,'Envelopes','100 letter size',11.50
-   112,'Post-it #1','3" by 3" 1000 sheets',9.90
-   113,'Post-it #2','2" by 2" 1000 sheets',7.90
-   114,'Post-it #3','4" by 6" 1000 sheets',13.90
+   111,Envelopes,100 letter size,11.50
+   112,Post-it #1,3" by 3" 1000 sheets,9.90
+   113,Post-it #2,2" by 2" 1000 sheets,7.90
+   114,Post-it #3,4" by 6" 1000 sheets,13.90
    ```  
    
    Notes:  
