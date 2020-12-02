@@ -156,7 +156,7 @@ In this section, we create a search form for the products and display results.
         <table>
             <tr>
                 <td><label for="prod_id">ID</label>:</td>
-                <td><input type="text" name="prod_id" id="prod_id" type="number" /></td>
+                <td><input type="number" name="prod_id" id="prod_id" /></td>
                 <td>(equal)</td>
             </tr>
             <tr>
@@ -336,7 +336,7 @@ In this section, we create a search form for the products and display results.
         <table>
             <tr>
                 <td><label for="prod_id">ID</label>:</td>
-                <td><input type="text" name="prod_id" id="prod_id" type="number" value="<%= prod.prod_id %>" /></td>
+                <td><input type="number" name="prod_id" id="prod_id" value="<%= prod.prod_id %>" /></td>
                 <td>(equal)</td>
             </tr>
             <tr>
