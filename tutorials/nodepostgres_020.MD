@@ -19,7 +19,6 @@
     // Required modules 
     const express = require("express");
     const app = express();
-    require("dotenv").config();
     const dblib = require("./dblib.js");
 
     const multer = require("multer");
@@ -51,7 +50,7 @@
 
     // Setup routes
     app.get("/", (req, res) => {
-        res.send("Root resource - Up and running!")
+        //res.send("Root resource - Up and running!")
         res.render("index");
     });
     ```  
@@ -500,7 +499,7 @@ Perform the same task using AJAX.  Recall that with AJAX, we only update a porti
         if (result.trans === "Error") {
             divElement.innerHTML += `
             <h2>Application Error</h2><br>
-            <p>${result.result}
+            <p>${result.result}</p>
             `
         } else {
             if (result.result.length === 0) {
