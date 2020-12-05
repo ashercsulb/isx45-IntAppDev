@@ -378,7 +378,7 @@ In this section, we create a search form for the products and display results.
                     </tr>
                 </thead>
                 <tbody>
-                    <% result.result.forEach(product => { %> 
+                    <% Array.from(result.result).forEach(product => { %> 
                         <tr>
                             <td><%= product.prod_id %></td>
                             <td><%= product.prod_name %></td>
@@ -506,7 +506,7 @@ Perform the same task using AJAX.  Recall that with AJAX, we only update a porti
                 divElement.innerHTML += `<h3>No records found!</h3>`;
             } else {
                 var tdText = "";
-                result.result.forEach(product => { 
+                Array.from(result.result).forEach(product => { 
                     tdText += `
                     <tr>
                         <td>${product.prod_id}</td>
