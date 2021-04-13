@@ -5,6 +5,9 @@ Assumptions:
 - Using VSCode
 - Using Express Framework
 
+Note:
+- Images shown with year 2020 in the footer, your application will show 2021
+
 # What is EJS?
 [EJS](https://ejs.co/) is a simple templating language that lets you generate HTML markup with plain JavaScript.  
 Reference
