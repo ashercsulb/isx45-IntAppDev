@@ -91,7 +91,7 @@ Create documents in the **views** directory
 ```js
     <hr>
     <footer>
-        &copy 2020 Internet Application Development
+        &copy 2021 Internet Application Development
     </footer>
 </body>
 </html>
