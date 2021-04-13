@@ -82,7 +82,7 @@ Updated _footer.ejs content:
 ```js
         <hr>
         <footer>
-            &copy 2020 Internet Application Development
+            &copy 2021 Internet Application Development
         </footer>
     </div>
 </body>
