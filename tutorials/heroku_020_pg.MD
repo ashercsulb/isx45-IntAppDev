@@ -57,7 +57,7 @@ Below is a link to download and install PostgreSQL:
  # Create a GitHub Repository / Deploy to Heroku  
  We are going to emulate the steps to create an application starting with a GitHub repository.  
  
- **Note:  **
+ **Note:**
  We can create an application or a just a database in Heroku and skip GitHub altogether.  However, steps shown here are emulating the process of using GitHub for source control.  
  
  1. Create a repository in GitHub, e.g. **herokupg**  
