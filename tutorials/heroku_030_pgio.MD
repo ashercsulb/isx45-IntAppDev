@@ -347,7 +347,10 @@ We will start with a simple page displaying records in the **PRODUCT** table
   - Use Multer to upload a file to memory   
   - Look at the file content, parse it, and upload to the database  
  
-1. Update **index.js** to use Multer  
+1. Install Multer
+   ```npm install multer```
+
+2. Update **index.js** to use Multer  
    Add the following content towards the top of the file  
    ```js
    const multer = require("multer");
