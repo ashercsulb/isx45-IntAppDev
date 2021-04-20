@@ -286,7 +286,7 @@ We will start with a simple page displaying records in the **PRODUCT** table
    Content:
    ```html
      <footer>
-       <p>&copy; 2020 - Asher's Heroku PostgreSQL I/O Application</p>
+       <p>&copy; 2021 - Asher's Heroku PostgreSQL I/O Application</p>
      </footer>
 
    </div>
