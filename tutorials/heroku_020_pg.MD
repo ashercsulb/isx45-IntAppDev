@@ -29,6 +29,13 @@ It is recommended that you go through the following Heroku tutorial:
 
 The tutorial contains a "Set up" section with instructions to install the Heroku CLI.  
 
+**Notes:**  
+- Main goal is to install the Heroku CLI.  
+  - If you don't run through the entire tutorial, at least read the steps
+- Windows User Acccount Control - If you the application will not load due to Windows UAC, you can install it as follows:
+  - Lanuch "command prompt" as an Administrator
+  - Install from the command prompt: e.g. *yourpath>*heroku-x64.exe
+
 ### Install PostgreSQL Client ###
 See the following link at the Heroku website for PostgreSQL client installation:  
 [Heroku - PostgreSQL Local Setup](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup)  
