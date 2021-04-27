@@ -114,7 +114,7 @@
         ```html  
         <hr>
         <footer>
-            <p>&copy; 2020 - Asher's Node PostgreSQL Application</p>
+            <p>&copy; 2021 - Asher's Node PostgreSQL Application</p>
           </footer>
 
         </div>
