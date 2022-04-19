@@ -68,8 +68,11 @@ At completion of the project, your file/folder structure will be as follows
 ## 2. Create EJS Views and Stylesheet
 ### EJS
 **Task:** Create header and footer views to be included in all application pages.  
-Create the **views** directory.  Create the files below in the views directory.  
-1. _header.ejs content:
+1. Create a directory for the stylesheet
+   - Directory name: **views**  - 
+   - Create the files below in the views directory.  
+   
+2. _header.ejs content:
 ```js
 <!DOCTYPE html>
 <html lang="en">
@@ -90,7 +93,7 @@ Create the **views** directory.  Create the files below in the views directory.
         </tr>
     </table>
 ```  
-2. _footer.ejs content:
+3. _footer.ejs content:
 ```js
     <hr>
     <footer>
@@ -99,7 +102,7 @@ Create the **views** directory.  Create the files below in the views directory.
 </body>
 </html>
 ```  
-3. The index page will be our start page.  
+4. The index page will be our start page.  
 index.ejs content:
 ```js
 <%- include("_header") -%>
@@ -111,9 +114,9 @@ index.ejs content:
 ### Stylesheet
 For now, we will create a simple style sheet.  
 In a later tutorial, we will use [bootstrap](https://getbootstrap.com/).  
-1. Create a folder for the stylesheet
-   - Folder name: **css**  
-2. Create a file 
+1. Create a directory for the stylesheet
+   - Directory name: **css**  
+2. Create a file per the below in the css directory
    - File name: styles.css
    content:
    ```css
