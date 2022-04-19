@@ -94,7 +94,7 @@ At completion of the project, your file/folder structure will be as follows
             </tr>
         </table>
     ```  
-3.  Filename: _footer.ejs 
+3.  Filename: _footer.ejs  
     Content:
     ```js
         <hr>
@@ -105,7 +105,7 @@ At completion of the project, your file/folder structure will be as follows
     </html>
     ```  
 4.  The index page will be our start page.  
-    Filename: index.ejs 
+    Filename: index.ejs  
     Content:
     ```js
     <%- include("_header") -%>
