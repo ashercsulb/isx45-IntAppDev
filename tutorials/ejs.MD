@@ -133,7 +133,7 @@ In a later tutorial, we will use [bootstrap](https://getbootstrap.com/).
    ```
 
 ## 3. Setup The Server  
-Copy the content below to the **index.js** file.   
+Create the **index.js** file.  
   - Content:
   ```js
   // Load packages and access services
