@@ -117,10 +117,10 @@ At completion of the project, your file/folder structure will be as follows
 ### Stylesheet
 For now, we will create a simple style sheet.  
 In a later tutorial, we will use [bootstrap](https://getbootstrap.com/).  
-1. Create a directory for the stylesheet
+1. Create a directory for the stylesheet  
    - Directory name: **css**  
-2. Create a file per the below in the css directory
-   File name: styles.css
+2. Create a file per the below in the css directory  
+   File name: styles.css  
    Content:
    ```css
    * {
