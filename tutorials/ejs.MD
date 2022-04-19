@@ -6,7 +6,7 @@ Assumptions:
 - Using Express Framework
 
 Note:
-- Images shown with year 2020 in the footer, your application will show 2021
+- Images shown with year 2020 in the footer, for your application show the current year
 
 # What is EJS?
 [EJS](https://ejs.co/) is a simple templating language that lets you generate HTML markup with plain JavaScript.  
@@ -94,7 +94,7 @@ Create documents in the **views** directory
 ```js
     <hr>
     <footer>
-        &copy 2021 Internet Application Development
+        &copy 2022 Internet Application Development
     </footer>
 </body>
 </html>
