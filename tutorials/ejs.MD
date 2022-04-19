@@ -72,53 +72,56 @@ At completion of the project, your file/folder structure will be as follows
    - Directory name: **views**  - 
    - Create the files below in the views directory.  
    
-2. _header.ejs content:
-```js
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EJS Tutorial</title>
-    <link href="/styles.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-    <table width="100%">
-        <tr>
-            <td>EJS Tutorial: <a href="/">Welcome</a> |
-                <a href="/services">Services</a> |
-                <a href="/formPost">Form Post</a> |
-                <a href="/formAjax">Form Ajax</a> 
-            </td>
-        </tr>
-    </table>
-```  
-3. _footer.ejs content:
-```js
-    <hr>
-    <footer>
-        &copy 2022 Internet Application Development
-    </footer>
-</body>
-</html>
-```  
-4. The index page will be our start page.  
-index.ejs content:
-```js
-<%- include("_header") -%>
+2.  Filename: _header.ejs  
+    Content:
+    ```js
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>EJS Tutorial</title>
+        <link href="/styles.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <table width="100%">
+            <tr>
+                <td>EJS Tutorial: <a href="/">Welcome</a> |
+                    <a href="/services">Services</a> |
+                    <a href="/formPost">Form Post</a> |
+                    <a href="/formAjax">Form Ajax</a> 
+                </td>
+            </tr>
+        </table>
+    ```  
+3.  Filename: _footer.ejs 
+    Content:
+    ```js
+        <hr>
+        <footer>
+            &copy 2022 Internet Application Development
+        </footer>
+    </body>
+    </html>
+    ```  
+4.  The index page will be our start page.  
+    Filename: index.ejs 
+    Content:
+    ```js
+    <%- include("_header") -%>
 
-<h1>Welcome to our site</h1>
+    <h1>Welcome to our site</h1>
 
-<%- include("_footer") -%>
-```  
+    <%- include("_footer") -%>
+    ```  
 ### Stylesheet
 For now, we will create a simple style sheet.  
 In a later tutorial, we will use [bootstrap](https://getbootstrap.com/).  
 1. Create a directory for the stylesheet
    - Directory name: **css**  
 2. Create a file per the below in the css directory
-   - File name: styles.css
-   content:
+   File name: styles.css
+   Content:
    ```css
    * {
     font-family: Calibri;
@@ -194,7 +197,7 @@ Copy the content below to the **index.js** file.
   ```
   Create the following file (in the views directory)  
   - Filename: services.ejs  
-    content:
+    Content:
     ```js
     <%- include("_header") -%>
 
