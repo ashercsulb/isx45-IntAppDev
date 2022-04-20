@@ -32,7 +32,7 @@ The tutorial contains a "Set up" section with instructions to install the Heroku
 **Notes:**  
 - Main goal is to install the Heroku CLI.  
   - If you don't run through the entire tutorial, at least read the steps
-- Windows User Acccount Control - If you the application will not load due to Windows UAC, you can install it as follows:
+- Windows User Acccount Control - If your the application will not load due to Windows UAC, you can install it as follows:
   - Lanuch "command prompt" as an Administrator
   - Install from the command prompt: e.g. *yourpath>heroku-x64.exe*
 
