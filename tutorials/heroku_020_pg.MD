@@ -111,6 +111,8 @@ Below is a link to download and install PostgreSQL:
        Can do this from VSCode or Command Line.  I'll show the CLI command.  
        Issue the following command:  
        ```git remote add heroku https://git.heroku.com/yourHerokuGitUrl.git```  (Use your Heroku git URL from above)  
+       or  
+       ```heroku git:remote -a https://git.heroku.com/yourHerokuGitUrl.git```  (Use your Heroku git URL from above)  
     5. ```heroku config```  
        Note: since you added the applications git URL, it is the defaul application for Heroku CLI commands and you do not need to use the --app parameter  
 
