@@ -292,7 +292,7 @@ Create the **index.js** file.
   - Both synchronous and asynchronous HTTP requests
   - Form enctype (encoded type)
     - application/x-www-form-urlencoded - This is the default.  Characters are encoded before sent.
-    - multipart/form-data - No characters are encoded. 
+    - multipart/form-data - No characters are encoded.  Needed when files are uploaded.
     
   For illustration purposes, we will call the same form view for both GET and POST requests.  
   In the form, we'll use JavaScript to check if variables have been passed back (POST).  If so, we'll populate the form with the data entered.  
