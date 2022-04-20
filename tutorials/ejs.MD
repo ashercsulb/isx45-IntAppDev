@@ -474,8 +474,8 @@ Change a single line in your form per the below:
 Stop and Start your server and go to the Form Post page.  
 Test it: [http://localhost:3000/](http://localhost:3000) and click on Form Post  
 
-Notice that you are not getting the data back.  In order to process **multipart/form-data**, use **multer** package.  
-Install multer package:  
+Notice that you are not getting the data back.  In order to process **multipart/form-data**, use the **multer** package.  
+Install the multer package:  
 ```npm install multer ```  
 
 Edit **index.js** to require multer, access multer services, and modify the /formPost POST route.  
