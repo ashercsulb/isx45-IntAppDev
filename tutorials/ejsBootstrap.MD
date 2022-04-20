@@ -7,7 +7,7 @@ Assumptions:
 - Completed previous EJS tutorial
 
 Note:
-- Images shown with year 2020 in the footer, your application will show 2021
+- mages shown with year 2020 in the footer, for your application show the current year
 
 # 1. What is Bootstrap  
 [Bootstrap](https://getbootstrap.com/) is a popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.  
@@ -85,7 +85,7 @@ Updated _footer.ejs content:
 ```js
         <hr>
         <footer>
-            &copy 2021 Internet Application Development
+            &copy 2022 Internet Application Development
         </footer>
     </div>
 </body>
