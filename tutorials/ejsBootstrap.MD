@@ -102,6 +102,7 @@ Look at the Bootstrap website and experiment with other colors, margins, etc...
 
 # 4. Bootstrap Form  
 Modify the formPost.ejs file to use Bootstraps horizontal form.  
+(Below shows with enctype="multipart/form-data".  Can remove this.)
 Updated formPost.ejs content:   
 ```js
 <%- include("_header") -%>
