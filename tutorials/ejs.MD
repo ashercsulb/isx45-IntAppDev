@@ -300,7 +300,7 @@ Create the **index.js** file.
   ### Form POST  
   In this scenario, we will not use AJAX, just the traditional POST.  
   We will create GET and POST routes to **formPost**, passing variables back in the POST call.  
-  This is simply a demonstration for you to understand how to retrieve data from a form and send it to another page.  Also, to perform EJS logic in the template.  It is not best practice.  
+  This is simply a demonstration for you to understand how to retrieve data from a form and send it to another page.  Also, to perform EJS logic in the template.  It is not the best practice.  
   Add the following routes to **index.js**
   ```js
   // GET Route to form page
@@ -362,10 +362,10 @@ Create the **index.js** file.
     <%- include("_footer") -%>
     ```  
     Notes
-    - If block logic checks if **message** variable exists.  It does not from a GET request.  In this case, we set name to blank.
-    - If message does exist, we set **name** to the value entered in the form
+    - If block logic checks if the **message** variable exists.  From the GET request, it does not.  So, we set name to blank.
+    - If the **message** variable does exist, we set **name** to the value entered in the form
     - The input tag value attribute is <%= name %>
-    - There are other ways to handle this.  For example, pass empty values for variables in the GET route and populated values in the POST route.  This way, logic is not performed in the view.  
+    - There are other ways to handle this.  For example, pass empty values for variables when using GET and populated values in the POST route.  Using the method, logic is not performed in the view.  
     
   Stop and Start your server and go to the Form Post page.  
   Test it: [http://localhost:3000/](http://localhost:3000) and click on Form Post  
