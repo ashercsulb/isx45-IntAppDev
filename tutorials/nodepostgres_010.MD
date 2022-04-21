@@ -594,7 +594,7 @@ High level steps, if necessary, refer to previous tutorials
             console.log("Error Details:");
             console.log(errorMessage);
         };
-    })()
+    })();
 
     ```  
     
