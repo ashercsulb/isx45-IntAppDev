@@ -635,7 +635,7 @@ High level steps, if necessary, refer to previous tutorials
     Notes:  
     - Program now runs sequentially with the desired feedback.
     - In reality, you would log errors in a log file/database and let the program execute as fast as possible  
-    - Cannot use forEach loop with promises or async functions  
+    - ***Cannot use forEach loop with promises or async functions***  
     - Execute the program again.  This time you should see the following summary:  
     ```
     Records processed: 5
