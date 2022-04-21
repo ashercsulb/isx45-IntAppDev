@@ -339,7 +339,7 @@ We will start with a simple page displaying records in the **PRODUCT** table
 # Input from Local File  
   Updated to use Multer instead of express-fileupload.  
   Since we are alerady using Multer to get the forms values, we will use it for file upload.  
-  [npm multer reference](https://www.npmjs.com/package/multer)  
+  [npm install multer reference](https://www.npmjs.com/package/multer)  
   
   In this section, a local file will be used for inserting records to the database.  
   We cannot use typical file I/O when the application is running on the server.  
