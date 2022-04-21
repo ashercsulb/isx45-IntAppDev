@@ -493,7 +493,7 @@ We will start with a simple page displaying records in the **PRODUCT** table
    
    Notes  
    - This is a simple view with a single button.  
-   - It is meant to illustrate concept (you can enhance it)  
+   - It is meant to illustrate the concepts (you can enhance it)  
    
 2. Modify **index.js**: add resources to display and process the output form  
    Content:  
