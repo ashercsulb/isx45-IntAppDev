@@ -250,7 +250,7 @@ High level steps, if necessary, refer to previous tutorials
             console.log("--- STEP 3: After call to getAll() ---");
             console.log(result);
         }
-        )()
+        )();
         ```
         
         See below with try catch block  
@@ -274,7 +274,7 @@ High level steps, if necessary, refer to previous tutorials
             console.log("--- STEP 4: After call to getAll() ---");
             console.log(result);
         }
-        )()
+        )();
         ```  
         
 5.  Get Total Records / Modularize Code  
