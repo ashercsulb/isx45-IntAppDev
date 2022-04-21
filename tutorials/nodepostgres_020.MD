@@ -211,7 +211,7 @@ In this section, we create a search form for the products and display results.
 
         Notes:
         - Note that `async` function and `await`.  Try the code without this.  What do you think will be returned?  
-        - Did not perform validation that dblib.getTotalRecords() was successful.  You can add that and test.  
+        - Current code does not perform validation that dblib.getTotalRecords() was successful.  You can add that and test.  
         - Added a type value "get" to the object sent to the view.  This will be used in the EJS to determine what to render based on "get" or "post" response
     
     2.  search.ejs change (modify the below single line).  Display the variable passed from index.js  
