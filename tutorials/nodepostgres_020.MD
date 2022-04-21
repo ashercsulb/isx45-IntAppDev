@@ -403,7 +403,7 @@ In this section, we create a search form for the products and display results.
     - Error checking is omitted but should be added.  Experiment with bad SQL and see the results.  
     
 7.  Modify index.js app.get() route  
-    Since we want to retrain the values the user entered in the form; we need to handle the initial request: "get"  
+    Since we want to retain the values the user entered in the form; we need to handle the initial request: "get"  
     There are two approaches:  
     - Send empty data from index.js  (approach shown below)
     - Check in the search.ejs view if the form is a "post" or "get".  If it is a "get", set the values to empty data.  
