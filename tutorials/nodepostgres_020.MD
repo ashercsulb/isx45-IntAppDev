@@ -623,5 +623,5 @@ Perform the same task using AJAX.  Recall that with AJAX, we only update a porti
   - Validate that the application works  
   
 # Conclusion  
-  You should be able to understand the difference between using stand POST and AJAX post.  
-  Note that with AJAX there is a lot less network traffic: do not need to refresh the entire page.  You did not need to keep track of what was on the form and send it back.  The disadvantage is that you had to create the output using JavaScript.
+  You should be able to understand the difference between using standard POST and AJAX post.  
+  Note that with AJAX there is a lot less network traffic: the entire page does not need to refresh.  You don't need to keep track of what was on the form and send it back.  The disadvantage is that you had to create the output using JavaScript.
