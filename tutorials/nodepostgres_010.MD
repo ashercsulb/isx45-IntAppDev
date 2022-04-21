@@ -247,7 +247,7 @@ High level steps, if necessary, refer to previous tutorials
         (async () => {
             console.log("--- STEP 1: Before call to getAll() ---");
             const result = await getAll();
-            console.log("--- STEP 4: After call to getAll() ---");
+            console.log("--- STEP 3: After call to getAll() ---");
             console.log(result);
         }
         )()
