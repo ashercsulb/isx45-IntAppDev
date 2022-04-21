@@ -220,9 +220,11 @@ High level steps, if necessary, refer to previous tutorials
         console.log("--- STEP 1: Before call to getAll() ---");
         getAll()
             .then(result => {
+                console.log("--- STEP 3: No Error ---");
                 console.log(result);
             })
             .catch(err => {
+                console.log("--- STEP 3: Error ---");
                 console.log(err.message);
             });
         console.log("--- STEP 4: After call to getAll() ---");
@@ -230,6 +232,7 @@ High level steps, if necessary, refer to previous tutorials
         
         Note:  
         - If we didn't wait for getAll() to complete, it would return a promise  
+        - Step 4 executes prior to step 3.  Why?  
         
     4.  Async Function with await  
         Another approach to waiting for results from a function call is to can create an ```async``` function and ```await``` for the asynchronous process to complete prior to continuing execution.  See the code below (using anonymous async function):  
