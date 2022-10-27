@@ -7,7 +7,7 @@ Assumptions:
 - Completed previous EJS tutorial
 
 Note:
-- mages shown with year 2020 in the footer, for your application show the current year
+- Images shown with year 2020 in the footer, for your application show the current year
 
 # 1. What is Bootstrap  
 [Bootstrap](https://getbootstrap.com/) is a popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.  
