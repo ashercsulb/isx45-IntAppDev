@@ -6,7 +6,7 @@ Assumptions:
 - Using Express Framework
 
 Note:
-- Images shown with year 2020 in the footer, for your application show the current year
+- Images shown with year YYYY in the footer, for your application show the current year (see _footer.ejs below)
 
 # What is EJS?
 [EJS](https://ejs.co/) is a simple templating language that lets you generate HTML markup with plain JavaScript.  
@@ -95,11 +95,11 @@ At completion of the project, your file/folder structure will be as follows
         </table>
     ```  
 3.  Filename: _footer.ejs  
-    Content:
+    Content: (change YYYY to current year)
     ```js
         <hr>
         <footer>
-            &copy 2022 Internet Application Development
+            &copy YYYY Internet Application Development
         </footer>
     </body>
     </html>
@@ -365,7 +365,7 @@ Create the **index.js** file.
     - If block logic checks if the **message** variable exists.  From the GET request, it does not.  So, we set name to blank.
     - If the **message** variable does exist, we set **name** to the value entered in the form
     - The input tag value attribute is <%= name %>
-    - There are other ways to handle this.  For example, pass empty values for variables when using GET and populated values in the POST route.  Using the method, logic is not performed in the view.  
+    - There are other ways to handle this.  For example, pass empty values for variables when using GET and populated values in the POST route.  Using this approach, logic is not performed in the view.  
     
   Stop and Start your server and go to the Form Post page.  
   Test it: [http://localhost:3000/](http://localhost:3000) and click on Form Post  
@@ -534,12 +534,12 @@ app.use((req, res, next) => {
 
 Update index.js (add routes for AJAX call):  
 ```js
-// GET Route to form page
+// GET Route to form page (AJAX)
 app.get('/formAjax', (request, response) => {
     response.render("formAjax")
 });
 
-// POST Route to form page
+// POST Route to form page (AJAX)
 app.post('/formAjax', upload.array(), (request, response) => {    
     // Send form data back to the form
     const data = {
@@ -618,6 +618,9 @@ document.querySelector("form").addEventListener("submit", e => {
 
 <%- include("_footer") -%>
 ```  
+
+Note:
+- Note the differences in the code using AJAX.  Review index.js "get" and "post".  Review ejs files.
 
 Stop and Start your server and go to the Form Post page.  
 Test it: [http://localhost:3000/](http://localhost:3000) and click on Form Post  
