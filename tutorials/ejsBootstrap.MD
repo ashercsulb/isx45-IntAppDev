@@ -7,7 +7,7 @@ Assumptions:
 - Completed previous EJS tutorial
 
 Note:
-- Images shown with year 2020 in the footer, for your application show the current year
+- Images shown with year YYYY in the footer, for your application show the current year (set in _footer.ejs)
 
 # 1. What is Bootstrap  
 [Bootstrap](https://getbootstrap.com/) is a popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.  
@@ -32,7 +32,7 @@ It is a CSS Framework for developing responsive and mobile-first websites.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>EJS Tutorial</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     </head>
     <body>
         <table width="100%">
@@ -55,12 +55,12 @@ Updated _header.ejs content:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EJS Tutorial</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand">EJS Tutorial</a>
+            <a class="navbar-brand" style="margin-left: 10px">EJS Tutorial</a>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="/">Welcome</a>
@@ -76,20 +76,18 @@ Updated _header.ejs content:
                 </li>
             </ul>
         </nav>
-    
-
 ```  
 
-Modify the _footer.ejs file to close the <div> tag created in the header.  
+Modify the _footer.ejs file to close the `<div>` tag created in the header.  
 Updated _footer.ejs content:  
 ```js
         <hr>
         <footer>
-            &copy 2022 Internet Application Development
+            &copy YYYY Internet Application Development
         </footer>
     </div>
 </body>
-</html>  
+</html>
 ```
 
 Start the server and view the updated navigation bar.  You should see the following:  
@@ -162,7 +160,7 @@ Updated formPost.ejs content:
 
 <%- include("_footer") -%>
 ```  
-Stop / Start the server and view the updated form.  You should see the following:  
+Refresh the page and view the updated form.  You should see the following:  
 ![Form](images/ejsBootstrap_form.png)  
 
 Experiment with other form options.  
