@@ -11,7 +11,7 @@ High level steps, if necessary, refer to previous tutorials
 
 3. Heroku  
    1. Deploy the application from GitHub
-   2. Add a Postgres Database  
+   2. Add a Postgres Database (Crunchy Bridge)  
    
 4. Local Machine:  
    1. Add the remote Heroku git URL to your local environment.  
@@ -33,16 +33,15 @@ High level steps, if necessary, refer to previous tutorials
     // Set up EJS
     app.set("view engine", "ejs");
 
-
-    // Start listener
-    app.listen(process.env.PORT || 3000, () => {
-        console.log("Server started (http://localhost:3000/) !");
-    });
-
     // Setup routes
     app.get("/", (req, res) => {
         //res.send ("Hello world...");
         res.render("index");
+    });
+    
+    // Start listener
+    app.listen(process.env.PORT || 3000, () => {
+        console.log("Server started (http://localhost:3000/) !");
     });
     ```  
     
@@ -73,7 +72,7 @@ High level steps, if necessary, refer to previous tutorials
      
 # Database Connection  
  1. From the terminal, connect to the database  
-     ```heroku pg:psql```  
+     ```psql connection_string```  
      
  2. Run the script below to create a PRODUCT table and populate with records  
     Create a script file, content:  
@@ -116,37 +115,37 @@ High level steps, if necessary, refer to previous tutorials
     // Add database package and connection string (can remove ssl)
     const { Pool } = require('pg');
     const pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
+      connectionString: process.env.CRUNCHY_DATABASE_URL,
       ssl: {
         rejectUnauthorized: false
       }
     });
     ```  
     
-    Note:  Above uses a DATABASE_URL variable.  It needs to be defined.  
+    Note:  Above uses a CRUNCHY_DATABASE_URL variable.  It needs to be defined.  
     
- 4. DATABASE_URL variable  
-    - You could have different values for different environments.  In our case, we will connect to Heroku's PostgreSQL cloud database.  The value will be declared in the .env file.  
-    - The variable needs to be defined in order to run the application locally.  It is not required When running in Heroku PaaS: it is already set up in that environment.  
+ 4. CRUNCHY_DATABASE_URL variable  
+    - You could have different values for different environments.  In our case, we will connect to Crunchy Bridge's PostgreSQL cloud database.  The value will be declared in the .env file.  
+    - The variable needs to be defined in order to run the application locally.  It is not required when running in Heroku PaaS: it is already set up in that environment.  
     
-    1. Determine the value of DATABASE_URL  
+    1. Determine the value of CRUNCHY_DATABASE_URL  
         From the terminal (if you're connected to the database, either exit or start another integrated terminal), run  
         ```heroku config```   
-        You will see the DATABASE_URL variable and value.  Copy the value (long string beginning with postgres://...)  
+        You will see the CRUNCHY_DATABASE_URL variable and value.  Copy the value (long string beginning with postgres://...)  
         
     2. Install the **dotenv** package (to manage environment variables)  
        ```npm install dotenv```  
        
-    3. Configure the DATABASE_URL variable.  
+    3. Configure the CRUNCHY_DATABASE_URL variable.  
        Create the following:  
        File name: **.env**  (create in the application root directory)  
        Content (use your value):  
        ```
-       DATABASE_URL="postgres://abcdef123456789:12345678901234567890c674eb05bc549afe83456689206d86719dda70ccb8b6@ec2-52-200-134-180.compute-1.amazonaws.com:5432/12345678909vdq"  
+       CRUNCHY_DATABASE_URL="postgres://abcdef123456789:12345678901234567890c674eb05bc549afe83456689206d86719dda70ccb8b6@ec2-52-200-134-180.db.postgresbridge.com:5432/postgres"  
        ```  
        
      4. Modify **index.js** to include the dotenv package.  Add the following line towards the top  
-        ```require('dotenv').config()```  
+        ```require('dotenv').config();```  
         
      5. **.gitignore** - Note that the .env file is already included  
      
@@ -259,7 +258,7 @@ We will start with a simple page displaying records in the **PRODUCT** table
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
      <title>Asher's Heroku PostgreSQL I/O Application</title>
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
    </head>
 
    <body>
@@ -267,7 +266,7 @@ We will start with a simple page displaying records in the **PRODUCT** table
      <div class="container">
 
        <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-         <a class="navbar-brand" href="/">Heroku Postgress IO App</a>
+         <a class="navbar-brand" style="margin-left: 10px" href="/">Heroku Postgress IO App</a>
          <ul class="navbar-nav mr-auto">
            <li class="nav-item">
              <a class="nav-link" href="/">Products</a>
@@ -283,10 +282,10 @@ We will start with a simple page displaying records in the **PRODUCT** table
    ```  
    
 2. _footer.ejs file (in views directory)  
-   Content:
+   Content (replace YYYY with current year):
    ```html
      <footer>
-       <p>&copy; 2022 - Asher's Heroku PostgreSQL I/O Application</p>
+       <p>&copy; YYYY - Asher's Heroku PostgreSQL I/O Application</p>
      </footer>
 
    </div>
@@ -372,7 +371,7 @@ We will start with a simple page displaying records in the **PRODUCT** table
 
       <script>
           // Typically, if the script is large, we place it in a separate file
-          //   For demonstrations, it is included in the same file.
+          //   For demonstration, it is included in the same file.
           // Handle form submission
           document.querySelector("form").addEventListener("submit", e => {
             // Cancel default behavior of sending a synchronous POST request
@@ -443,13 +442,15 @@ We will start with a simple page displaying records in the **PRODUCT** table
    Notes
    - Get request simply displays the form  
    - Post request  
-     - Write the data to a buffer variable
+     - Write file data to a buffer variable
      - Transform the buffer to a string and split on carriage return and line feed (\r\n) to process each line separately  
-     - Split each line by comma to get each individual attribute  
+     - Split each line by comma to get each individual attributes  
      - Call pool.query to insert the record to the database 
        - This is an asynchronous update.  We do not control sequence.  
-         Class discussion on alternatives.  
-         
+       - If a valid file is entered, the program will return the number of records processed (regardless of errors: e.g. insert fails or table does not exist). Test this.  
+       - To see errors, view the server console.
+         - How will the end user know there is an issue?  We will discuss this in more detail and provide solutions in a future tutorial.
+
 5. Stop and start the server.  Process the following file:  
    ```
    111,Envelopes,100 letter size,11.50
@@ -463,6 +464,7 @@ We will start with a simple page displaying records in the **PRODUCT** table
    - Choose the file from the application  
    - Submit the file for processing  
    - Validate that the records are entered in the database (connect to the database)  
+     - To retest, delete the records from the database and rerun the program or create a file with new records.  
    
    Image of Input View  
    ![Input](images/heroku_030_pgio_input.PNG)  

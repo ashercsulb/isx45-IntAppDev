@@ -30,8 +30,11 @@ It is recommended that you go through the following Heroku tutorial:
 The tutorial contains a "Set up" section with instructions to install the Heroku CLI.  
 
 **Notes:**  
-- Main goal is to install the Heroku CLI.  
+- You will learn a lot about deploying an app to Heroku  
+- Out main goal is to install the Heroku CLI.  
+  - Install the client on your plateform per the instructions in the "Set up" sections  
   - If you don't run through the entire tutorial, at least read the steps
+  - Skip the "Provision a database" section.  As of November 28, 2022 free Heroku Postgres is no longer available  
 - Windows User Acccount Control - If your application will not load due to Windows UAC, you can install it as follows:
   - Lanuch "command prompt" as an Administrator
   - Install from the command prompt: e.g. *yourpath>heroku-x64.exe*
@@ -50,8 +53,9 @@ Below is a link to download and install PostgreSQL:
   - pgAdmin
   - Stack Builder
   - Optional: Database Server (only if you want a local database server)  
+    - The objective is to install the client and connect to a cloud based database  
   
- **Note:**  
+ **IMPORTANT Note:**
  - Make sure to add the **/bin** directory to your path
   
  # Create a GitHub Repository / Deploy to Heroku  
@@ -78,40 +82,52 @@ Below is a link to download and install PostgreSQL:
      **Note:**  
      **Build will fail** - We don't have an app yet.  It's OK, the goal is to experiment with PostgreSQL 
      2.  Click on the application **Resources** tab  
-         --> In the **Add-ons** section, start typing `Pos` (Matching add-ons will show)  
-         --> Then, select **Heroku Postgres**  
-         --> Submit Order Form (for the Hobby Dev - Free plan)  
+         --> Click the "Find more add-ons" button  
          ![Heroku Add-ons](images/heroku_020_pg_addons.PNG)  
-
-         The Heroku Postgres add-on will be created:  
+     3. In the Heroku Add-ons screen, click on "Data Stores" on the left
+        --> Click on Crunchy Bridge (Postgres Database).  
+        ![Heroku Add-ons](images/heroku_020_pg_addonsCruchy.PNG)  
+     4. Click on "Install Crunch Bridge"  
+        ![Heroku Add-ons](images/heroku_020_pg_addonsInstallCruchy.PNG)  
+     5. Select the following:
+        - Add-on plan: Test-Free  
+        - App to provision to:  Name of your app (name will appear on the screen)  
+        --> Click "Submit Order Form"  
+        ![Heroku Add-ons](images/heroku_020_pg_addonsSubmitOrder.PNG)
+     6. The Heroku Postgres add-on will be created  
+        Click on the "Dev Center" link to learn more about the add-on    
          ![Heroku Add-ons](images/heroku_020_pg_addonsCreated.PNG)   
-     3. View Only: Click on the "Heroku Postgres" link  
-        --> Click the **Settings** tab  
-        --> Click "View Credentials..." button  
-        Note the following (copy and paste them to review later):  
-        - URI  
-        - Heroku CLI  
-     4. Get the application URL  
+     7. View Only (images omitted): Click on the "Cruchy Bridge" link in the Add-ons section  
+        --> Click on the NAME link (view information about your database)  
+        --> Click "Connection" option (top menu selection)  
+        - Select:  
+          Role: postgres  
+          Format: psql  
+          Copy the connection string and save it in a temp file: psql postgres://application:...
+     8. Return to Heroku - View Application Settings
         - Go to the Dashboard  
         - Click on your application  
         - Click on the **Settings** tab  
-          Note the following (copy and save it to use later):  
-          Heroku git URL:  
+          Note the following (copy and save it for later use):  
+          Heroku git URL: https://git.heroku.com/yourAppName.git  
+
+          **Config Vars** Section  
+          - Click on Reveal Config Vars  
+            Note the following:  
+            - CRUNCHY_CLUSTER_ID
+            - CRUNCHY_DATABASE_URL  
+              Note:  This is the same as the connection string you copied above (Cruch connection)  
         
  4. Local Machine  
-    Issue the following at the Terminal
+    Issue the following at the Terminal (from VS Code, open integrated terminal)
     1. ```heroku login```  
        Launch the browser and log in.
     2. ```heroku config```  
        You will get an error that the application is missing.  
        First solution is to enter the application name.  Next is to add the Heroku remote Git path.  
     3. ```heroku config --app asherherokupg``` (use your app name)  
-       You will see the DATABASE_URL (This is the same as the URI setting you saw in Heroku above)  
+       You will see the application variables: CRUNCHY_CLUSTER_ID AND CRUNCHY_DATABASE_URL (same as the settings you saw in Heroku, Reveal Config Vars)  
     4. Add the remote "Heroku git URL" to your local environment  
-       Can do this from VSCode or Command Line.  I'll show the CLI command.  
-       Issue the following command:  
-       ```git remote add heroku https://git.heroku.com/yourHerokuGitUrl.git```  (Use your Heroku git URL from above)  
-       or  
        ```heroku git:remote -a yourHerokuAppName```  (Use your app name from above)  
     5. ```heroku config```  
        Note: since you added the applications git URL, it is the defaul application for Heroku CLI commands and you do not need to use the --app parameter  
@@ -119,25 +135,39 @@ Below is a link to download and install PostgreSQL:
 # Client Connection to PostgreSQL / Database Commands  
   The following will explain how to connect to the remote database and issue database commands.  
   The following commands will be issued at the Terminal  
-  1. Connect to the database with the PostgreSQL client  
-     ```heroku pg:psql```  
+  1. Determine connection string  
+     ```heroku config```  
+     Copy the connecton string value stored in CRUNCHY_DATABASE_URL
+  2. Connect to the database with the PostgreSQL client  
+     ```psql connection_string (from above```  
      You should see output similar to below:
      ```
-     --> Connecting to postgresql-horizontal-XXXXX
-     psql (13.1, server 12.5 (Ubuntu 12.5-1.pgdg16.04+1))
+     psql (15.0)
      WARNING: Console code page (437) differs from Windows code page (1252)
               8-bit characters might not work correctly. See psql reference
               page "Notes for Windows users" for details.
-     SSL connection (protocol: TLSv1.2, cipher: XXXXX-RSA-XXXXX-XXX-XXXXX, bits: 256, compression: off)
+     SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off)
      Type "help" for help.
 
-     asherherokupg::DATABASE=>
-     ```
+     postgres=#
+     ```  
+     Notes: 
+     - You can create a variable for the database connection string and use it.  
+     - Discuss potential change of database url
+     - Review connection options in the Cruchy Bridge site.  
 
  2. See existing tables  
      ```\d```  
      You should see the following:  
-     ```Did not find any relations.```  
+     ```
+     postgres=# \d
+                          List of relations
+     Schema |          Name           | Type |       Owner
+     --------+-------------------------+------+-------------------
+     public | pg_stat_statements      | view | crunchy_superuser
+     public | pg_stat_statements_info | view | crunchy_superuser
+     (2 rows)
+     ```  
      
   3. Create a table:  
      ```
@@ -147,17 +177,19 @@ Below is a link to download and install PostgreSQL:
      LNAME  VARCHAR(15)
      );
      ```  
-     You should get a ```TABLE CREATED``` confirmation.
+     You should get a ```CREATE TABLE``` confirmation.
      
   4. See existing tables: ```\d```  
      You should see the following:  
      ```
-                            List of relations
-     Schema |       Name       |   Type   |     Owner
-     --------+------------------+----------+----------------
-     public | testtable        | table    | btmetkwenbgrdl
-     public | testtable_id_seq | sequence | btmetkwenbgrdl
-     (2 rows)
+                             List of relations
+      Schema |          Name           |   Type   |       Owner
+     --------+-------------------------+----------+-------------------
+      public | pg_stat_statements      | view     | crunchy_superuser
+      public | pg_stat_statements_info | view     | crunchy_superuser
+      public | testtable               | table    | postgres
+      public | testtable_id_seq        | sequence | postgres
+     (4 rows)
      ```  
      The table and the sequence for the table.
   

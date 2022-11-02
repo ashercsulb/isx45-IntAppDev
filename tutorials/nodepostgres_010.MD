@@ -1,5 +1,9 @@
 # Overview  
-This tutorial builds on the previous Heroku PostgreSQL tutorials.  The focus of this tutorial is a better understanding of using node.js for interfacing with PostgreSQL and asynchronous function calls.  We will not use Express.  Reference the following:  
+This tutorial builds on the previous Heroku PostgreSQL tutorials.  The objectives of this tutorial are:
+1.  A better understanding of using node.js for interfacing with PostgreSQL and asynchronous function calls, and  
+2.  Learn to modularize your code by creating a separate file for database calls.  
+
+We will not use Express.  Reference the following:  
 [node-postgres website](https://node-postgres.com/)
 
 # Application Set Up  
@@ -27,7 +31,7 @@ High level steps, if necessary, refer to previous tutorials
    
 7.  .env file
     1. Create the .env file  
-    2. Add a DATABASE_URL variable with the connection string information to your database  
+    2. Add a CRUNCHY_DATABASE_URL variable with the connection string information to your database  
     
 8.  Setup the Database  
     Run the following script:  
@@ -68,7 +72,7 @@ High level steps, if necessary, refer to previous tutorials
     // Add database package and connection string
     const { Pool } = require('pg');
     const pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
+      connectionString: process.env.CRUNCHY_DATABASE_URL,
       ssl: {
           rejectUnauthorized: false
       }
@@ -171,7 +175,7 @@ High level steps, if necessary, refer to previous tutorials
     2.  Then, ```getAll()``` is started and ```console.log("--- STEP 2: Inside getAll() ---");``` is executed  
     3.  Then, ```pool.query(...)``` is queued up.  It is an Asynchronous promise, so JavaScript continues to the next command  
     4.  ```console.log("--- STEP 4: After call to getAll() ---");``` is executed  
-    5.  Then, ```console.log(result);``` is executed.  Note that ```pool.query(...)``` is not complete yet, so ```undefined``` is output  
+    5.  Then, ```console.log(result);``` is executed.  Note that ```pool.query(...)``` is not complete yet, so ```undefined``` is output (nothing is returned)  
     6.  Then, ```pool.query(...)``` is completed successfully and ```console.log("--- STEP 3: No Error ---")``` is executed  
     
 4.  How can we run the code in sequence?  
@@ -235,25 +239,26 @@ High level steps, if necessary, refer to previous tutorials
         - Step 4 executes prior to step 3.  Why?  
         
     4.  Async Function with await  
-        Another approach to waiting for results from a function call is to can create an ```async``` function and ```await``` for the asynchronous process to complete prior to continuing execution.  See the code below (using anonymous async function):  
+        Another approach to waiting for results from a function call is to can create an ```async``` function and ```await``` for the asynchronous process to complete prior to continuing execution.  See the code below:  
         ```js
         const getAll =  () => {
-            console.log("--- STEP 2: Inside getAll() ---");
-            sql = "SELECT * FROM product";
-            // For illustration, not using try catch
-            return pool.query(sql, []); 
+          console.log("--- STEP 2: Inside getAll() ---");
+          sql = "SELECT * FROM product";
+          // For illustration, not using try catch
+          return pool.query(sql, []); 
         };
 
-        (async () => {
-            console.log("--- STEP 1: Before call to getAll() ---");
-            const result = await getAll();
-            console.log("--- STEP 3: After call to getAll() ---");
-            console.log(result);
-        }
-        )();
+        const dbTest = async () => {
+          console.log("--- STEP 1: Before call to getAll() ---");
+          const result = await getAll();
+          console.log("--- STEP 3: After call to getAll() ---");
+          console.log(result);
+        };
+
+        dbTest();
         ```
         
-        See below with try catch block  
+        See below with try catch block and using anonymous async function:  
         ```js
         const getAll = async () => {
             console.log("--- STEP 2: Inside getAll() ---");
@@ -355,7 +360,7 @@ High level steps, if necessary, refer to previous tutorials
         
         Notes:  
         - Function is now in a separate file
-        - Exported the function
+        - Export the function
         
         Modify index.js as follows (entire content below):
         ```js
@@ -416,7 +421,7 @@ High level steps, if necessary, refer to previous tutorials
     module.exports.insertProduct = insertProduct;
     ```  
     
-    1. Use an Array: Add the following code to **index.js** 
+    Use an Array: Add the following code to **index.js** 
     ```js
     const producta = [200,'Book', 'The JS Way', 9.99];
     dblib.insertProduct(producta)
@@ -444,7 +449,7 @@ High level steps, if necessary, refer to previous tutorials
     ```  
     
     Notes:
-    - Query the database to confirm record was inserted  
+    - Query the database to confirm the record was inserted  
     - Note the usage of parameters for the SQL INSERT statement  
     - You may change the array to an object and test the code (next section will use project objects)  
 
@@ -567,7 +572,7 @@ High level steps, if necessary, refer to previous tutorials
     `DELETE FROM product WHERE prod_id > 200;`  
     
     How can we fix this?  
-    Several ways, as discussed above.  Below is one method using an async function with await.  
+    Several ways, as discussed above.  Below is one method using an anonymous async function with await.  
     Change **index.js** per the below:  
     ```js
     // Loop to insert - using async () function and await
@@ -633,7 +638,7 @@ High level steps, if necessary, refer to previous tutorials
     ```  
     
     Notes:  
-    - Program now runs sequentially with the desired feedback.
+    - Program now runs sequentially with the desired feedback
     - In reality, you would log errors in a log file/database and let the program execute as fast as possible  
     - ***Cannot use forEach loop with promises or async functions***  
     - Execute the program again.  This time you should see the following summary:  

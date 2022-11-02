@@ -6,7 +6,8 @@
   
 # Application Setup  
 
-1.  Add the following packages
+1.  OPTIONAL - Make a backup of the previous tutorial at the current state  
+    Add the following packages
     `npm install express ejs multer`
     
 2.  Create the following directories:  
@@ -43,15 +44,15 @@
     // Application folders
     app.use(express.static("public"));
 
-    // Start listener
-    app.listen(process.env.PORT || 3000, () => {
-        console.log("Server started (http://localhost:3000/) !");
-    });
-
     // Setup routes
     app.get("/", (req, res) => {
         //res.send("Root resource - Up and running!")
         res.render("index");
+    });
+    
+    // Start listener
+    app.listen(process.env.PORT || 3000, () => {
+        console.log("Server started (http://localhost:3000/) !");
     });
     ```  
     
@@ -86,7 +87,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>Asher's Node PostgreSQL Application</title>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     </head>
 
     <body>
@@ -94,7 +95,7 @@
       <div class="container">
 
         <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-          <a class="navbar-brand" href="/">Node PostgreSQL Application</a>
+          <a class="navbar-brand" style="margin-left: 10px" href="/">Node PostgreSQL Application</a>
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
               <a class="nav-link" href="/">Products</a>
@@ -110,11 +111,11 @@
     ```  
     
     2.  _footer.ejs file (in the views directory)  
-        Content:      
+        Content (modify YYYY to current year):      
         ```html  
         <hr>
         <footer>
-            <p>&copy; 2021 - Asher's Node PostgreSQL Application</p>
+            <p>&copy; YYYY - Asher's Node PostgreSQL Application</p>
           </footer>
 
         </div>
@@ -212,9 +213,9 @@ In this section, we create a search form for the products and display results.
         Notes:
         - Note that `async` function and `await`.  Try the code without this.  What do you think will be returned?  
         - Current code does not perform validation that dblib.getTotalRecords() was successful.  You can add that and test.  
-        - Added a type value "get" to the object sent to the view.  This will be used in the EJS to determine what to render based on "get" or "post" response
+        - Added a type value "get" to the object sent to the view.  This will be used in the EJS view to determine what to render based on "get" or "post" response
     
-    2.  search.ejs change (modify the below single line).  Display the variable passed from index.js  
+    2.  search.ejs change (modify the single line below).  Display the variable passed from index.js  
         ```html
         <h4>Total number of records in the database: <%= totRecs %></h4>
         ```  
@@ -225,7 +226,7 @@ In this section, we create a search form for the products and display results.
     dblib.js changes, add the following function:  
     ```js
     const findProducts = (product) => {
-        // Will build query based on data provided from the form
+        // Will build query based on data provided in the form
         //  Use parameters to avoid sql injection
 
         // Declare variables
@@ -291,7 +292,7 @@ In this section, we create a search form for the products and display results.
     ```js
     app.post("/search", async (req, res) => {
         // Omitted validation check
-        //  Can get this from the page rather than using another DB call.
+        //  Can get totRecs from the page rather than using another DB call.
         //  Add it as a hidden form value.
         const totRecs = await dblib.getTotalRecords();
 
@@ -442,7 +443,7 @@ Perform the same task using AJAX.  Recall that with AJAX, we only update a porti
     <h4>Total number of records in the database: <%= totRecs %></h4>
 
     <!-- Not using bootstrap, just a simple form that you may enhance -->
-    <!-- Using AJAX, not form action -->
+    <!-- Using AJAX, no form action -->
     <form>
         <table>
             <tr>
@@ -623,5 +624,5 @@ Perform the same task using AJAX.  Recall that with AJAX, we only update a porti
   - Validate that the application works  
   
 # Conclusion  
-  You should be able to understand the difference between using standard POST and AJAX post.  
+  You should understand the difference between using standard POST and AJAX post.  
   Note that with AJAX there is a lot less network traffic: the entire page does not need to refresh.  You don't need to keep track of what was on the form and send it back.  The disadvantage is that you had to create the output using JavaScript.
