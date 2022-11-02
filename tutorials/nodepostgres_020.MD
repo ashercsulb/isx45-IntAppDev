@@ -477,7 +477,7 @@ Perform the same task using AJAX.  Recall that with AJAX, we only update a porti
 
     <div id="output"></div>
 
-    <script src="searchajax.js"></script>
+    <script src="/searchajax.js"></script>
 
     <%- include("_footer") -%>   
     ```  
