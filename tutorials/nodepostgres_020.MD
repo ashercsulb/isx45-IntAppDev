@@ -500,9 +500,9 @@ Perform the same task using AJAX.  Recall that with AJAX, we only update a porti
       if (result.trans === "Error") {
           // Create h2 and paragraph elements and add to div
           const h2Elem = document.createElement("h2");
-          h2Elem.innerText = "Application Error";
+          h2Elem.textContent = "Application Error";
           const paraElement = document.createElement("p");
-          paraElement.innerText = result.result;
+          paraElement.textContent = result.result;
           // Add elements
           divElement.appendChild(h2Elem);
           divElement.appendChild(paraElement);
@@ -510,7 +510,7 @@ Perform the same task using AJAX.  Recall that with AJAX, we only update a porti
           if (result.result.length === 0) {
             // Create h3 and add to div
             const h3Elem = document.createElement("h3");
-            h3Elem.innerText = "No Records found!";
+            h3Elem.textContent = "No Records found!";
             divElement.appendChild(h3Elem);
           } else {
               // Create a table element and table header row
@@ -518,13 +518,13 @@ Perform the same task using AJAX.  Recall that with AJAX, we only update a porti
               const theadElement = document.createElement("thead");
               const thRowElement = document.createElement("tr");
               const thIdElement = document.createElement("td");
-              thIdElement.innerText = "ID";
+              thIdElement.textContent = "ID";
               const thNameElement = document.createElement("td");
-              thNameElement.innerText = "Name";
+              thNameElement.textContent = "Name";
               const thDescElement = document.createElement("td");
-              thDescElement.innerText = "Desc";
+              thDescElement.textContent = "Desc";
               const thPriceElement = document.createElement("td");
-              thPriceElement.innerText = "Price";
+              thPriceElement.textContent = "Price";
               // Add elements
               thRowElement.appendChild(thIdElement);
               thRowElement.appendChild(thNameElement);
@@ -540,13 +540,13 @@ Perform the same task using AJAX.  Recall that with AJAX, we only update a porti
                 // Create table rows
                 const trElement = document.createElement("tr");
                 const tdIdElement = document.createElement("td");
-                tdIdElement.innerText = product.prod_id;
+                tdIdElement.textContent = product.prod_id;
                 const tdNameElement = document.createElement("td");
-                tdNameElement.innerText = product.prod_name;
+                tdNameElement.textContent = product.prod_name;
                 const tdDescElement = document.createElement("td");
-                tdDescElement.innerText = product.prod_desc;
+                tdDescElement.textContent = product.prod_desc;
                 const tdPriceElement = document.createElement("td");
-                tdPriceElement.innerText = product.prod_price;
+                tdPriceElement.textContent = product.prod_price;
                 // Add elements
                 trElement.appendChild(tdIdElement);
                 trElement.appendChild(tdNameElement);
