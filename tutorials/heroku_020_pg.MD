@@ -1,5 +1,5 @@
 # Overview  
-In this tutorial you will create an application on Heroku with a PostgreSQL database.  
+In this tutorial, you will create an application on Heroku with a PostgreSQL database.  
 The focus will be on getting the database setup in Heroku and connecting to it from your local machine using the Heroku CLI.  
 In a future tutorial, we will implement an application using a back end PostgreSQL database.  
 
@@ -32,10 +32,10 @@ The tutorial contains a "Set up" section with instructions to install the Heroku
 **Notes:**  
 - You will learn a lot about deploying an app to Heroku  
 - Out main goal is to install the Heroku CLI.  
-  - Install the client on your plateform per the instructions in the "Set up" sections  
+  - Install the client on your platform per the instructions in the "Set up" sections  
   - If you don't run through the entire tutorial, at least read the steps
   - Skip the "Provision a database" section.  As of November 28, 2022 free Heroku Postgres is no longer available  
-- Windows User Acccount Control - If your application will not load due to Windows UAC, you can install it as follows:
+- Windows User Account Control - If your application will not load due to Windows UAC, you can install it as follows:
   - Lanuch "command prompt" as an Administrator
   - Install from the command prompt: e.g. *yourpath>heroku-x64.exe*
 
@@ -59,10 +59,10 @@ Below is a link to download and install PostgreSQL:
  - Make sure to add the **/bin** directory to your path
   
  # Create a GitHub Repository / Deploy to Heroku  
- We are going to emulate the steps to create an application starting with a GitHub repository.  
+ We are going to emulate the steps to create an application, starting with a GitHub repository.  
  
  **Note:**
- We can create an application or a just a database in Heroku and skip GitHub altogether.  However, steps shown here are emulating the process of using GitHub for source control.  
+ We can create an application or just a database on Heroku and skip GitHub altogether.  However, steps shown here are emulating the process of using GitHub for source control.  
  
  1. Create a repository in GitHub, e.g. **herokupg**  
      - Select "Add .gitignore" and select the **Node** template  
@@ -130,14 +130,14 @@ Below is a link to download and install PostgreSQL:
     4. Add the remote "Heroku git URL" to your local environment  
        ```heroku git:remote -a yourHerokuAppName```  (Use your app name from above)  
     5. ```heroku config```  
-       Note: since you added the applications git URL, it is the defaul application for Heroku CLI commands and you do not need to use the --app parameter  
+       Note: since you added the application's git URL, it is the default application for Heroku CLI commands, and you do not need to use the --app parameter  
 
 # Client Connection to PostgreSQL / Database Commands  
   The following will explain how to connect to the remote database and issue database commands.  
   The following commands will be issued at the Terminal  
   1. Determine connection string  
      ```heroku config```  
-     Copy the connecton string value stored in CRUNCHY_DATABASE_URL
+     Copy the connection string value stored in CRUNCHY_DATABASE_URL
   2. Connect to the database with the PostgreSQL client  
      ```psql connection_string (from above```  
      You should see output similar to below:
@@ -231,7 +231,7 @@ Below is a link to download and install PostgreSQL:
      Create a directory:  **`scripts`**  (e.g.: `e:\scripts` in Windows; `/Users/yourUser/scripts` in Mac/Linux)  
      Create a file in the above directory: **`pgscript.sql`**  
      Run the script as follows:  
-     `\i e:/scripts/pgscript.sql`  On windows, note the forward slashes `/`  
+     `\i e:/scripts/pgscript.sql`  On Windows, note the forward slashes `/`  
      or  
      `\i /Users/yourUser/scripts/pgscript.sql`  On Mac/Linux
      
