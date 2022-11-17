@@ -139,7 +139,7 @@ Below is a link to download and install PostgreSQL:
      ```heroku config```  
      Copy the connection string value stored in CRUNCHY_DATABASE_URL
   2. Connect to the database with the PostgreSQL client  
-     ```psql connection_string (from above```  
+     ```psql connection_string (from above)```  
      You should see output similar to below:
      ```
      psql (15.0)
