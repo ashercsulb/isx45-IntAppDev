@@ -1,5 +1,5 @@
 # Overview  
-  This tutorial builds on the previous node-postgres tutorial.  Express and EJS are added to create a web-based application.  We will create a search screen and post back records found using both AJAX and default synchronous post.  
+  This tutorial builds on the previous node-postgres tutorial.  Express and EJS are added to create a web-based application.  We will create a search screen and post back records found using both AJAX and synchronous (default) posts.  
   
   **Prerequisite**  
   Complete the previous tutorial.  
@@ -7,14 +7,15 @@
 # Application Setup  
 
 1.  OPTIONAL - Make a backup of the previous tutorial at the current state  
-    Add the following packages
+    
+2.  Add the following packages  
     `npm install express ejs multer`
     
-2.  Create the following directories:  
+3.  Create the following directories:  
     - views  
     - public  
     
-3.  Modify **index.js** file.  
+4.  Modify **index.js** file.  
     Content:  
     ```js
     // Required modules 
@@ -56,7 +57,7 @@
     });
     ```  
     
-4.  Create the following file in the views directory  
+5.  Create the following file in the views directory  
     File name: **index.ejs**  
     Content:  
     ```html
@@ -76,7 +77,7 @@
     
     Start the application and confirm that the Web Server is Running  
     
-5.  Header for Navigation / Footer  
+6.  Header for Navigation / Footer  
     1.  _header.ejs file (in the views directory)  
         Content:  
     ```html
@@ -138,10 +139,10 @@
         <%- include("_footer") -%>
         ```  
         
-        Start / Stop the application and verify the header and footer are displayed.
+        Refresh the page and verify that the header and footer are displayed.
         
 # Search Screen (default POST)  
-In this section, we create a search form for the products and display results.  
+In this section, we create a search form for the products and display the results.  
 1.  Create a search page.  
     File: search.ejs (in the views directory)  
     Content (initial, will update):  
@@ -211,9 +212,9 @@ In this section, we create a search form for the products and display results.
         ```  
 
         Notes:
-        - Note that `async` function and `await`.  Try the code without this.  What do you think will be returned?  
+        - Note the `async` function and `await`.  Try the code without this.  What do you think will be returned?  
         - Current code does not perform validation that dblib.getTotalRecords() was successful.  You can add that and test.  
-        - Added a type value "get" to the object sent to the view.  This will be used in the EJS view to determine what to render based on "get" or "post" response
+        - Added a key=type and value="get" to the object sent to the view.  This will be used in the EJS view to determine what to render based on a "get" or a "post" response
     
     2.  search.ejs change (modify the single line below).  Display the variable passed from index.js  
         ```html
@@ -222,11 +223,11 @@ In this section, we create a search form for the products and display results.
         
         Stop / Start the application and verify that the total is displayed.  
         
-4.  Create a function to return database records based on search criterion entered  
+4.  Create a function to return database records based on a search criterion entered  
     dblib.js changes, add the following function:  
     ```js
     const findProducts = (product) => {
-        // Will build query based on data provided in the form
+        // Will build the query based on data provided in the form
         //  Use parameters to avoid sql injection
 
         // Declare variables
@@ -234,7 +235,7 @@ In this section, we create a search form for the products and display results.
         params = [];
         sql = "SELECT * FROM product WHERE true";
 
-        // Check data provided and build query as necessary
+        // Check data provided and build the query as necessary
         if (product.prod_id !== "") {
             params.push(parseInt(product.prod_id));
             sql += ` AND prod_id = $${i}`;
@@ -265,13 +266,13 @@ In this section, we create a search form for the products and display results.
             .then(result => {
                 return { 
                     trans: "success",
-                    result: result.rows
+                    rows: result.rows
                 }
             })
             .catch(err => {
                 return {
                     trans: "Error",
-                    result: `Error: ${err.message}`
+                    error: `Error: ${err.message}`
                 }
             });
     };
@@ -318,6 +319,7 @@ In this section, we create a search form for the products and display results.
     
     Notes:  
     - Recalculated totRecs.  Should get this as a form data and return to the form.  This is an extra database call.  
+      - OK for demonstration
     - Call dblib.findProducts().  Omitted error checking.  
       - Return the type of request, totRecs, result from dblib.findProducts(), and the values sent from the form (req.body)  
         - Use req.body to repopulate the form with values initially entered.
@@ -366,7 +368,7 @@ In this section, we create a search form for the products and display results.
 
     <!-- Omitted Error Checking / Needs to be added -->
     <% if (type === "post") { %>
-        <% if (result.result.length === 0) { %>
+        <% if (result.rows.length === 0) { %>
             <h3>No records found!</h3>
         <% } else { %>
             <table>
@@ -379,7 +381,7 @@ In this section, we create a search form for the products and display results.
                     </tr>
                 </thead>
                 <tbody>
-                    <% result.result.forEach(product => { %> 
+                    <% result.rows.forEach(product => { %> 
                         <tr>
                             <td><%= product.prod_id %></td>
                             <td><%= product.prod_name %></td>
@@ -399,7 +401,7 @@ In this section, we create a search form for the products and display results.
     Notes:  
     - Each input type is populated with the value sent from index.js, e.g. value="<%= prod.prod_id %>"  
     - At the bottom of the view, check if the response is a "post", if it is, display the results.  
-      - Ensure that data is returned (result.result.length === 0), can chose better variable names.  
+      - Ensure that data is returned (result.rows.length === 0)  
     - Display the results in a table, iterating through the results
     - Error checking is omitted but should be added.  Experiment with bad SQL and see the results.  
     
@@ -407,7 +409,7 @@ In this section, we create a search form for the products and display results.
     Since we want to retain the values the user entered in the form; we need to handle the initial request: "get"  
     There are two approaches:  
     - Send empty data from index.js  (approach shown below)
-    - Check in the search.ejs view if the form is a "post" or "get".  If it is a "get", set the values to empty data.  
+    - Check in the search.ejs view if the form is a "post" or a "get".  If it is a "get", set the values to empty data.  
     
     Content (sending empty data from index.js):  
     ```js
@@ -432,7 +434,7 @@ In this section, we create a search form for the products and display results.
 # Search Screen (AJAX)  
 Perform the same task using AJAX.  Recall that with AJAX, we only update a portion of the page that changes.  So, we do not need to send form data back, since we don't change the form.  
 
-1.  Create a new view page.
+1.  Create a new view page.  
     Name: searchajax.ejs (in the views directory)  
     Content:
     ```js
@@ -477,7 +479,7 @@ Perform the same task using AJAX.  Recall that with AJAX, we only update a porti
 
     <div id="output"></div>
 
-    <script src="/searchajax.js"></script>
+    <script src="searchajax.js"></script>
 
     <%- include("_footer") -%>   
     ```  
@@ -494,23 +496,23 @@ Perform the same task using AJAX.  Recall that with AJAX, we only update a porti
     // Function to display results
     const displayResults = (result) => {
       const divElement = document.getElementById("output");
-      // Reset output at each call
+      // Reset output for each call
       divElement.innerHTML = "";
 
       if (result.trans === "Error") {
           // Create h2 and paragraph elements and add to div
           const h2Elem = document.createElement("h2");
-          h2Elem.textContent = "Application Error";
+          h2Elem.innerText = "Application Error";
           const paraElement = document.createElement("p");
-          paraElement.textContent = result.result;
+          paraElement.innerText = result.error;
           // Add elements
           divElement.appendChild(h2Elem);
           divElement.appendChild(paraElement);
       } else {
-          if (result.result.length === 0) {
+          if (result.rows.length === 0) {
             // Create h3 and add to div
             const h3Elem = document.createElement("h3");
-            h3Elem.textContent = "No Records found!";
+            h3Elem.innerText = "No Records found!";
             divElement.appendChild(h3Elem);
           } else {
               // Create a table element and table header row
@@ -518,13 +520,13 @@ Perform the same task using AJAX.  Recall that with AJAX, we only update a porti
               const theadElement = document.createElement("thead");
               const thRowElement = document.createElement("tr");
               const thIdElement = document.createElement("td");
-              thIdElement.textContent = "ID";
+              thIdElement.innerText = "ID";
               const thNameElement = document.createElement("td");
-              thNameElement.textContent = "Name";
+              thNameElement.innerText = "Name";
               const thDescElement = document.createElement("td");
-              thDescElement.textContent = "Desc";
+              thDescElement.innerText = "Desc";
               const thPriceElement = document.createElement("td");
-              thPriceElement.textContent = "Price";
+              thPriceElement.innerText = "Price";
               // Add elements
               thRowElement.appendChild(thIdElement);
               thRowElement.appendChild(thNameElement);
@@ -536,17 +538,17 @@ Perform the same task using AJAX.  Recall that with AJAX, we only update a porti
               tblElement.appendChild(theadElement);
 
               // Loop
-              result.result.forEach(product => { 
+              result.rows.forEach(product => { 
                 // Create table rows
                 const trElement = document.createElement("tr");
                 const tdIdElement = document.createElement("td");
-                tdIdElement.textContent = product.prod_id;
+                tdIdElement.innerText = product.prod_id;
                 const tdNameElement = document.createElement("td");
-                tdNameElement.textContent = product.prod_name;
+                tdNameElement.innerText = product.prod_name;
                 const tdDescElement = document.createElement("td");
-                tdDescElement.textContent = product.prod_desc;
+                tdDescElement.innerText = product.prod_desc;
                 const tdPriceElement = document.createElement("td");
-                tdPriceElement.textContent = product.prod_price;
+                tdPriceElement.innerText = product.prod_price;
                 // Add elements
                 trElement.appendChild(tdIdElement);
                 trElement.appendChild(tdNameElement);
@@ -607,7 +609,7 @@ Perform the same task using AJAX.  Recall that with AJAX, we only update a porti
     app.post("/searchajax", upload.array(), async (req, res) => {
         dblib.findProducts(req.body)
             .then(result => res.send(result))
-            .catch(err => res.send({trans: "Error", result: err.message}));
+            .catch(err => res.send({trans: "Error", error: err.message}));
 
     });
     ```  
@@ -616,13 +618,13 @@ Perform the same task using AJAX.  Recall that with AJAX, we only update a porti
     - Again, relatively simple response.
     - Added upload.array() as a parameter to use multer
     
-# Commit to GitHub, Deploy to Heroku  
+# Commit to GitHub, Deploy to Azure
   Complete the following  
   - Commit changes  
   - Deploy to GitHub  
-  - Deploy to Heroku  
+  - Deploy to Azure  
   - Validate that the application works  
   
 # Conclusion  
-  You should understand the difference between using standard POST and AJAX post.  
+  You should understand the difference between using a standard POST and an AJAX post.  
   Note that with AJAX there is a lot less network traffic: the entire page does not need to refresh.  You don't need to keep track of what was on the form and send it back.  The disadvantage is that you had to create the output using JavaScript.
