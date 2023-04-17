@@ -1,5 +1,5 @@
 # Overview  
-This tutorial builds on the previous Heroku PostgreSQL tutorials.  The objectives of this tutorial are:
+This tutorial builds on the previous PostgreSQL tutorials.  The objectives of this tutorial are:
 1.  A better understanding of using node.js for interfacing with PostgreSQL and asynchronous function calls, and  
 2.  Learn to modularize your code by creating a separate file for database calls.  
 
@@ -14,26 +14,23 @@ High level steps, if necessary, refer to previous tutorials
    
 2.  Clone the repository to your local machine  
 
-3.  Heroku  
-    1. Deploy the application from GitHub
-    2. Add a Postgres Database  
-   
-4.  Local Machine:  
-    1. Add the remote Heroku git URL to your local environment.  
-   
-5.  Initialize the Node application  
+3.  ElephantSQL  
+    Instance - Create a new instance or use an existing instance.  
+    Either way, note the connection string URL (postgres://yourConnectionString)  
+
+4.  Initialize the Node application  
     ```npm init```  
-    Add the following link to the package.json file, scripts section (before the ```"test": ...``` line    
+    Package.josn file.  Add the following link to the package.json file, scripts section (remove the  ```"test": ...``` line)    
     ```"start": "node index.js",```  
    
-6.  Add the following packages to the application (PostgreSQL and dotenv):  
+5.  Add the following packages to the application (PostgreSQL and dotenv):  
     `npm install pg dotenv`  
    
-7.  .env file
+6.  .env file
     1. Create the .env file  
-    2. Add a CRUNCHY_DATABASE_URL variable with the connection string information to your database  
+    2. Add a DATABASE_URL variable with the connection string information to your database  
     
-8.  Setup the Database  
+7.  Setup the Database  
     Run the following script:  
     ```sql
     -- Drop the table
@@ -72,10 +69,11 @@ High level steps, if necessary, refer to previous tutorials
     // Add database package and connection string
     const { Pool } = require('pg');
     const pool = new Pool({
-      connectionString: process.env.CRUNCHY_DATABASE_URL,
+      connectionString: process.env.DATABASE_URL,
       ssl: {
           rejectUnauthorized: false
-      }
+      },
+      max: 2
     });
     ```  
   
@@ -258,32 +256,31 @@ High level steps, if necessary, refer to previous tutorials
         dbTest();
         ```
         
-        See below with try catch block and using anonymous async function:  
+        See below with a try catch block and using an anonymous async function:  
         ```js
-        const getAll = async () => {
-            console.log("--- STEP 2: Inside getAll() ---");
-            sql = "SELECT * FROM product";
-            try {
-                const result =  await pool.query(sql, []);
-                console.log("--- STEP 3: No Error ---");
-                return (result).rows;
-            } catch (err) {
-                console.log("--- STEP 3: Error ---");
-                return err.message;
-            };
+        const getAll = () => {
+          console.log("--- STEP 2: Inside getAll() ---");
+          sql = "SELECT * FROM product";
+          try {
+              console.log("--- STEP 3: Try Block ---");  
+              return pool.query(sql, []);
+          } catch (err) {
+              console.log("--- STEP 3: Error Block ---");
+              return err.message;
+          };
         };
 
         (async () => {
-            console.log("--- STEP 1: Before call to getAll() ---");
-            const result = await getAll();
-            console.log("--- STEP 4: After call to getAll() ---");
-            console.log(result);
+          console.log("--- STEP 1: Before call to getAll() ---");
+          const result = await getAll();
+          console.log("--- STEP 4: After call to getAll() ---");
+          console.log(result);
         }
         )();
         ```  
         
 5.  Get Total Records / Modularize Code  
-    In this section, we'll create a function to return total number of records in the database.  We will then create a separate module/file to break up our code.  
+    In this section, we'll create a function to return the total number of records in the database.  We will then create a separate module/file to break up our code.  
     
     1.  Modify index.js to contain the following code  
         ```js
@@ -333,10 +330,11 @@ High level steps, if necessary, refer to previous tutorials
         // Add database package and connection string
         const { Pool } = require('pg');
         const pool = new Pool({
-            connectionString: process.env.CRUNCHY_DATABASE_URL,
+            connectionString: process.env.DATABASE_URL,
             ssl: {
                 rejectUnauthorized: false
-            }
+            },
+            max: 2
         });
 
         const getTotalRecords = () => {
@@ -451,7 +449,9 @@ High level steps, if necessary, refer to previous tutorials
     Notes:
     - Query the database to confirm the record was inserted  
     - Note the usage of parameters for the SQL INSERT statement  
-    - You may change the array to an object and test the code (next section will use project objects)  
+    - You may change the array to an object and test the code  
+      `const producta = {prod_id: 200, prod_name: 'Book', prod_desc: 'The JS Way', prod_price: 9.99};`  
+        - In the next section we will use product objects
 
 7.  Loop Insert / Capture Error / Asynchronous  
     In this exercise, a loop is used to insert multiple records into the database.  Errors are captured and displayed on the console.  Sequencing the inserts is reviewed.  
@@ -653,11 +653,11 @@ High level steps, if necessary, refer to previous tutorials
     Error on insert of product id 202.  duplicate key value violates unique constraint "product_pkey"
     Error on insert of product id 203.  duplicate key value violates unique constraint "product_pkey"
     ```  
-# Commit to GitHub / Deploy to Heroku  
+# Commit to GitHub / Deploy to Azure
   Complete the following  
   - Commit changes
   - Deploy to GitHub
-  - Deploy to Heroku
+  - Deploy to Azure
   - Validate that the application works  
   
 # Conclusion  
