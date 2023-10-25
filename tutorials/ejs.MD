@@ -365,7 +365,7 @@ Create the **index.js** file.
     - If block logic checks if the **message** variable exists.  From the GET request, it does not.  So, we set name to blank.
     - If the **message** variable does exist, we set **name** to the value entered in the form
     - The input tag value attribute is <%= name %>
-    - There are other ways to handle this.  For example, pass empty values for variables when using GET and populated values in the POST route.  Using this approach, logic is not performed in the view.  
+    - There are other ways to handle this.  For example, pass empty values for variables when using GET and populated values in the POST route.  Using this approach, logic is performed in the controller and not in the view.  
     
   Stop and Start your server and go to the Form Post page.  
   Test it: [http://localhost:3000/](http://localhost:3000) and click on Form Post  
