@@ -68,7 +68,7 @@ At completion of the project, your file/folder structure will be as follows
 ## 2. Create EJS Views and Stylesheet
 ### EJS
 **Task:** Create header and footer views to be included in all application pages.  
-1. Create a directory for the stylesheet
+1. Create a directory for the views  
    - Directory name: **views**  - 
    - Create the files below in the views directory.  
    
