@@ -249,7 +249,7 @@ Create the **index.js** file.
   }); 
   ```  
   Note:  
-  - Created a **data** object containing **years** and **services** array
+  - Created a **data** object containing **years** and a **services** array
   - Passing data in response.render
   
   Modify **services.ejs** per below:
