@@ -46,7 +46,8 @@ At completion of the project, your file/folder structure will be as follows
    ``` npm init -y ``` to accept defaults
    
    - Add the "start" script to the generated package.json file:  
-     ``` "start": "node index.js", ```  
+     ``` "start": "node index.js" ```  
+     You may omit the test script: ``` "test": "echo ...." ```  
      package.json contents (similar, depending on your answers)
      ```js
      {
@@ -55,8 +56,7 @@ At completion of the project, your file/folder structure will be as follows
       "description": "EJS Tutorial",
       "main": "index.js",
       "scripts": {
-        "start": "node index.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "node index.js"
       },
       "author": "Asher",
       "license": "ISC"
