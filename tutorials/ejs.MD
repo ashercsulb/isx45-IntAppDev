@@ -146,17 +146,17 @@ Create the **index.js** file.
   // Serve static content directly
   app.use(express.static("css"));
 
+  // Start listening to incoming requests
+  // If process.env.PORT is not defined, port number 3000 is used
+  const listener = app.listen(process.env.PORT || 3000, () => {
+      console.log(`Your app is listening on port ${listener.address().port}`);
+  });
+
   // Setup routes
 
   // Route to welcome page
   app.get('/', (request, response) => {
       response.render("index");
-  });
-
-  // Start listening to incoming requests
-  // If process.env.PORT is not defined, port number 3000 is used
-  const listener = app.listen(process.env.PORT || 3000, () => {
-      console.log(`Your app is listening on port ${listener.address().port}`);
   });
   ```  
   ### Notes  
