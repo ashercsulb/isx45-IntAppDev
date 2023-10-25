@@ -218,7 +218,7 @@ Create the **index.js** file.
   
   ### Passing more data (object with array)  
   Experiment passing additional data.
-  Modify /services route in **index.js** per below:  
+  Modify the /services route in **index.js** per the below:  
   ```js
   // Route to services page
   app.get('/services', (request, response) => {
