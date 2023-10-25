@@ -154,7 +154,7 @@ Create the **index.js** file.
 
   // Setup routes
 
-  // Route to welcome page
+  // Route to the welcome page
   app.get('/', (request, response) => {
       response.render("index");
   });
