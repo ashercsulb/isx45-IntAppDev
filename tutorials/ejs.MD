@@ -185,10 +185,10 @@ Create the **index.js** file.
   - _%> ‘Whitespace Slurping’ ending tag, removes all whitespace after it  
   
   We will use the **services.ejs** template to experiment receiving data from the server.  
-  Add a route to services.ejs passing it a name.  
+  Add a route to the services.ejs passing it a name.  
   Add the following to index.js:  
   ```js
-  // Route to services page
+  // Route to the services page
   app.get('/services', (request, response) => {
       //Data
       const name = "Amy";
@@ -220,7 +220,7 @@ Create the **index.js** file.
   Experiment passing additional data.
   Modify the /services route in **index.js** per the below:  
   ```js
-  // Route to services page
+  // Route to the services page
   app.get('/services', (request, response) => {
       //Data
       const name = "Amy";
