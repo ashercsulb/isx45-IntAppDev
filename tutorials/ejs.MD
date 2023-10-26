@@ -620,7 +620,7 @@ document.querySelector("form").addEventListener("submit", e => {
 ```  
 
 Note:
-- Note the differences in the code using AJAX.  Review index.js "get" and "post".  Review ejs files.
+- Note the differences in the code using AJAX.  Review index.js "get" and "post" routes.  Review the ejs files.
 
 Stop and Start your server and go to the Form Post page.  
 Test it: [http://localhost:3000/](http://localhost:3000) and click on Form Post  
