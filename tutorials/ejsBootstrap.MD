@@ -3,8 +3,8 @@ This tutorial builds on the ejs tutorial.  It provides step-by-step instructions
 
 Assumptions:
 - Using VSCode
-- Using Express Framework
-- Completed previous EJS tutorial
+- Using the Express Framework
+- Completed the previous EJS tutorial
 
 Note:
 - Images shown with year YYYY in the footer, for your application show the current year (set in _footer.ejs)
