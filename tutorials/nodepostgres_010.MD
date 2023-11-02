@@ -21,7 +21,7 @@ High level steps, if necessary, refer to previous tutorials
 4.  Initialize the Node application  
     ```npm init```  
     Package.josn file.  Add the following link to the package.json file, scripts section (remove the  ```"test": ...``` line)    
-    ```"start": "node index.js",```  
+    ```"start": "node index.js"```  
    
 5.  Add the following packages to the application (PostgreSQL and dotenv):  
     `npm install pg dotenv`  
