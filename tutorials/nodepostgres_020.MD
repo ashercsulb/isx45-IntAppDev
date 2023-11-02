@@ -44,16 +44,16 @@
 
     // Application folders
     app.use(express.static("public"));
+    
+    // Start listener
+    app.listen(process.env.PORT || 3000, () => {
+        console.log("Server started (http://localhost:3000/) !");
+    });
 
     // Setup routes
     app.get("/", (req, res) => {
         //res.send("Root resource - Up and running!")
         res.render("index");
-    });
-    
-    // Start listener
-    app.listen(process.env.PORT || 3000, () => {
-        console.log("Server started (http://localhost:3000/) !");
     });
     ```  
     
