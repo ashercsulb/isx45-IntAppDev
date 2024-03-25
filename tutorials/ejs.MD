@@ -547,7 +547,7 @@ app.post('/formAjax', upload.array(), (request, response) => {
         email: request.body.email,
         payment: request.body.payment
     };
-    //Call formPost passing message and name
+    //Send the caller (formAjax) the data in JSON format
     response.json(data);
 });
 ```
