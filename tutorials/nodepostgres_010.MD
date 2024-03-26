@@ -502,9 +502,9 @@ High level steps, if necessary, refer to previous tutorials
     ];
 
     // Declare variables
-    var numFailed = 0;
-    var numInserted = 0;
-    var errorMessage = "";
+    let numFailed = 0;
+    let numInserted = 0;
+    let errorMessage = "";
 
     // Loop to insert - Contains logic error for summary stats
     console.log("--- STEP 1: Pre-Loop");
