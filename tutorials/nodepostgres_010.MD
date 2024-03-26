@@ -80,7 +80,7 @@ High level steps, if necessary, refer to previous tutorials
 2.  Simple Select / View (err, res)  
     Add the following code to **index.js**  
     ```js
-    sql = "SELECT * FROM product";
+    const sql = "SELECT * FROM product";
     pool.query(sql, [], (err, res) => {
         console.log(err, res)
     });
@@ -94,7 +94,7 @@ High level steps, if necessary, refer to previous tutorials
     - rows - This is an Array of Objects, each object representing a database record  
 
     View a returned error.  Change the code as follows:  
-    sql = "SELECT * FROM nonexistent";  
+    const sql = "SELECT * FROM nonexistent";  
     Again, an object is returned.  Note the following:  
     - The first item is the error stack (message and stack detail)  
     
@@ -102,7 +102,7 @@ High level steps, if necessary, refer to previous tutorials
     Replace the code with the following:  
     ```js
     const getAll = () => {
-    sql = "SELECT * FROM product";
+    const sql = "SELECT * FROM product";
     pool.query(sql, [], (err, res) => {
         if (err) {
             return err.message;
@@ -119,10 +119,10 @@ High level steps, if necessary, refer to previous tutorials
     ```undefined```  
     Watch closely and you will notice that ```undefined``` is returned right away and the prompt eventually appears.  
     Why are we getting back ```undefined```?  
-    JavaScript is single threaded.  The ```pool.query``` method is asynchronous.  So, JavaScript continues running and waits for the response (the promise) to be fulfilled later.  Modify the code to remove the (err, res) callback functions as follows:
+    JavaScript is single threaded.  The ```pool.query``` method is asynchronous.  So, JavaScript continues running and waits for the response (the promise) to be fulfilled later.  Modify the code to remove the (err, res) callback function as follows:
     ```js
     const getAll = () => {
-        sql = "SELECT * FROM product";
+        const sql = "SELECT * FROM product";
         // For illustration, not using try catch
         return pool.query(sql, []);
     };
@@ -142,7 +142,7 @@ High level steps, if necessary, refer to previous tutorials
     ```js
     const getAll = () => {
         console.log("--- STEP 2: Inside getAll() ---");
-        sql = "SELECT * FROM product";
+        const sql = "SELECT * FROM product";
         pool.query(sql, [], (err, res) => {
             if (err) {
                 console.log("--- STEP 3: Error ---");
@@ -184,7 +184,7 @@ High level steps, if necessary, refer to previous tutorials
         The call back function has two parameters: ``` err, res```.  When the promise is fulfilled, the callback function is executed.  
         ```js
         const getAll = () => {
-            sql = "SELECT * FROM product";
+            const sql = "SELECT * FROM product";
             pool.query(sql, [], (err, res) => {
                 if (err) {
                     console.log(err.message);
@@ -199,7 +199,7 @@ High level steps, if necessary, refer to previous tutorials
     2.  Promise - Same as Callback, but using promise syntax (as discussed in our text)  
         ```js
         const getAll = () => {
-            sql = "SELECT * FROM product";
+            const sql = "SELECT * FROM product";
             pool.query(sql, [])
                 .then(res => {console.log(res.rows)})
                 .catch(err => {console.log(err.message)});
@@ -213,7 +213,7 @@ High level steps, if necessary, refer to previous tutorials
         ```js
         const getAll =  () => {
             console.log("--- STEP 2: Inside getAll() ---");
-            sql = "SELECT * FROM product";
+            const sql = "SELECT * FROM product";
             // For illustration, not using try catch
             return pool.query(sql, []); 
         };
@@ -241,7 +241,7 @@ High level steps, if necessary, refer to previous tutorials
         ```js
         const getAll =  () => {
           console.log("--- STEP 2: Inside getAll() ---");
-          sql = "SELECT * FROM product";
+          const sql = "SELECT * FROM product";
           // For illustration, not using try catch
           return pool.query(sql, []); 
         };
@@ -260,7 +260,7 @@ High level steps, if necessary, refer to previous tutorials
         ```js
         const getAll = () => {
           console.log("--- STEP 2: Inside getAll() ---");
-          sql = "SELECT * FROM product";
+          const sql = "SELECT * FROM product";
           try {
               console.log("--- STEP 3: Try Block ---");  
               return pool.query(sql, []);
@@ -285,7 +285,7 @@ High level steps, if necessary, refer to previous tutorials
     1.  Modify index.js to contain the following code  
         ```js
         const getTotalRecords = () => {
-            sql = "SELECT COUNT(*) FROM product";
+            const sql = "SELECT COUNT(*) FROM product";
             return pool.query(sql)
                 .then(result => {
                     return {
@@ -338,7 +338,7 @@ High level steps, if necessary, refer to previous tutorials
         });
 
         const getTotalRecords = () => {
-            sql = "SELECT COUNT(*) FROM product";
+            const sql = "SELECT COUNT(*) FROM product";
             return pool.query(sql)
                 .then(result => {
                     return {
