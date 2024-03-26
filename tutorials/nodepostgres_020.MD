@@ -231,9 +231,9 @@ In this section, we create a search form for the products and display the result
         //  Use parameters to avoid sql injection
 
         // Declare variables
-        var i = 1;
-        params = [];
-        sql = "SELECT * FROM product WHERE true";
+        let i = 1;
+        const params = [];
+        let sql = "SELECT * FROM product WHERE true";
 
         // Check data provided and build the query as necessary
         if (product.prod_id !== "") {
