@@ -584,12 +584,12 @@ Perform the same task using AJAX.  Recall that with AJAX, we only update a porti
     ```  
     
     Notes:  
-    - Standard event listener to handle form submit via AJAX call  
+    - Standard event listener to handle form submit via an AJAX call  
     - Calling displayResults to display the table in the "output" div element
       - Created HTML Elements, assigned values, and added to HTML page.
     - Performing error checking  
     
-3.  Modify index.js to add route for "get" 
+3.  Modify index.js to add a route for "get" 
     ```js
     app.get("/searchajax", async (req, res) => {
         // Omitted validation check
@@ -604,7 +604,7 @@ Perform the same task using AJAX.  Recall that with AJAX, we only update a porti
     - Very simple response.  Simply passing totRecs
     
 
-4.  Modify index.js to add route for "post" 
+4.  Modify index.js to add a route for "post" 
     ```js
     app.post("/searchajax", upload.array(), async (req, res) => {
         dblib.findProducts(req.body)
@@ -627,4 +627,4 @@ Perform the same task using AJAX.  Recall that with AJAX, we only update a porti
   
 # Conclusion  
   You should understand the difference between using a standard POST and an AJAX post.  
-  Note that with AJAX there is a lot less network traffic: the entire page does not need to refresh.  You don't need to keep track of what was on the form and send it back.  The disadvantage is that you had to create the output using JavaScript.
+  Note that with AJAX there is a lot less network traffic: the entire page does not need to refresh.  You don't need to keep track of what was on the form and send it back.  The disadvantage is that you had to create the output to update the HTML page using JavaScript.
