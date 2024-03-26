@@ -416,7 +416,7 @@ In this section, we create a search form for the products and display the result
     app.get("/search", async (req, res) => {
         // Omitted validation check
         const totRecs = await dblib.getTotalRecords();
-        //Create an empty product object (To populate form with values)
+        //Create an empty product object (To populate the form with values)
         const prod = {
             prod_id: "",
             prod_name: "",
