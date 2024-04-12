@@ -124,7 +124,7 @@ In a later tutorial, we will use [bootstrap](https://getbootstrap.com/).
    Content:
    ```css
    * {
-    font-family: Calibri;
+    font-family: Helvetica;
    }
 
    table {
