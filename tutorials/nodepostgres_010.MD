@@ -14,7 +14,7 @@ High level steps, if necessary, refer to previous tutorials
    
 2.  Clone the repository to your local machine  
 
-3.  ElephantSQL  
+3.  NeonSQL  
     Instance - Create a new instance or use an existing instance.  
     Either way, note the connection string URL (postgres://yourConnectionString)  
 
